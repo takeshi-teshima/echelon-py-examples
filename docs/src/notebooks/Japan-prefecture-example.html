@@ -49,7 +49,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="US-unemployment-rates-1997.html">US Unemployment Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo.html">Neumonia Tokyo Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="one-dim-demo.html">One dimensional toy data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="two-dim-demo-1.html">Two dimensional toy data (1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="two-dim-demo-2.html">Two dimensional toy data (2)</a></li>
@@ -350,26 +349,38 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
+<p>Download this page as a Jupyter notebook <span class="xref std std-doc">src/notebooks/Japan-prefecture-example.ipynb</span>.</p>
 <div class="section" id="Japan-Prefecture-Example">
 <h1>Japan Prefecture Example<a class="headerlink" href="#Japan-Prefecture-Example" title="Permalink to this headline"></a></h1>
 <p>Example adopted from</p>
 <ul class="simple">
 <li><p>栗原考次, &amp; 石岡文生. (2021). エシェロン解析: 階層化して視る時空間データ. 共立出版.</p></li>
 </ul>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># %load_ext autoreload</span>
-<span class="c1"># %autoreload 2</span>
-<span class="kn">import</span> <span class="nn">echelon</span>
+<span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">echelon</span>
 <span class="n">echelon</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -378,7 +389,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -441,7 +452,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -806,7 +817,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Echelon-construction">
 <h2>Echelon construction<a class="headerlink" href="#Echelon-construction" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -817,42 +828,17 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/scipy/sparse/compressed.py:746: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil_matrix is more efficient.
-  SparseEfficiencyWarning)
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Result_EchelonAnalysis(peak_echelons=[[&#39;東京&#39;, &#39;神奈川&#39;, &#39;埼玉&#39;, &#39;千葉&#39;, &#39;茨城&#39;], [&#39;大阪&#39;, &#39;兵庫&#39;, &#39;京都&#39;, &#39;奈良&#39;, &#39;滋賀&#39;], [&#39;愛知&#39;], [&#39;福岡&#39;, &#39;佐賀&#39;, &#39;長崎&#39;, &#39;熊本&#39;], [&#39;沖縄&#39;], [&#39;香川&#39;], [&#39;広島&#39;], [&#39;宮城&#39;], [&#39;石川&#39;, &#39;富山&#39;], [&#39;青森&#39;]], foundation_echelons=[[&#39;静岡&#39;], [&#39;三重&#39;, &#39;群馬&#39;, &#39;栃木&#39;], [&#39;岡山&#39;, &#39;愛媛&#39;], [&#39;山口&#39;, &#39;和歌山&#39;], [&#39;岐阜&#39;, &#39;福井&#39;, &#39;山梨&#39;, &#39;大分&#39;, &#39;新潟&#39;, &#39;徳島&#39;], [&#39;鹿児島&#39;, &#39;鳥取&#39;, &#39;長野&#39;, &#39;宮崎&#39;], [&#39;福島&#39;, &#39;山形&#39;, &#39;島根&#39;, &#39;高知&#39;], [&#39;秋田&#39;, &#39;岩手&#39;, &#39;北海道&#39;]], hierarchy_tree=Node(&#39;/17&#39;), oracle=&lt;echelon.oracle.DataFrameEchelonOracle object at 0x7fee70042860&gt;)
+Result_EchelonAnalysis(peak_echelons=[[&#39;東京&#39;, &#39;神奈川&#39;, &#39;埼玉&#39;, &#39;千葉&#39;, &#39;茨城&#39;], [&#39;大阪&#39;, &#39;兵庫&#39;, &#39;京都&#39;, &#39;奈良&#39;, &#39;滋賀&#39;], [&#39;愛知&#39;], [&#39;福岡&#39;, &#39;佐賀&#39;, &#39;長崎&#39;, &#39;熊本&#39;], [&#39;沖縄&#39;], [&#39;香川&#39;], [&#39;広島&#39;], [&#39;宮城&#39;], [&#39;石川&#39;, &#39;富山&#39;], [&#39;青森&#39;]], foundation_echelons=[[&#39;静岡&#39;], [&#39;三重&#39;, &#39;群馬&#39;, &#39;栃木&#39;], [&#39;岡山&#39;, &#39;愛媛&#39;], [&#39;山口&#39;, &#39;和歌山&#39;], [&#39;岐阜&#39;, &#39;福井&#39;, &#39;山梨&#39;, &#39;大分&#39;, &#39;新潟&#39;, &#39;徳島&#39;], [&#39;鹿児島&#39;, &#39;鳥取&#39;, &#39;長野&#39;, &#39;宮崎&#39;], [&#39;福島&#39;, &#39;山形&#39;, &#39;島根&#39;, &#39;高知&#39;], [&#39;秋田&#39;, &#39;岩手&#39;, &#39;北海道&#39;]], hierarchy_tree=Node(&#39;/17&#39;), oracle=&lt;echelon.oracle.DataFrameEchelonOracle object at 0x7f8d483a5198&gt;)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1107,7 +1093,7 @@ Result_EchelonAnalysis(peak_echelons=[[&#39;東京&#39;, &#39;神奈川&#39;, &#
 <div class="section" id="Echelon-dendrogram">
 <h2>Echelon dendrogram<a class="headerlink" href="#Echelon-dendrogram" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1180,7 +1166,7 @@ E18(秋田): [北海道, 岩手, 秋田]
 <div class="section" id="Echelon-clusters">
 <h2>Echelon clusters<a class="headerlink" href="#Echelon-clusters" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1191,7 +1177,7 @@ E18(秋田): [北海道, 岩手, 秋田]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1437,7 +1423,7 @@ E18(秋田): [北海道, 岩手, 秋田]
 <div class="section" id="Hotspot-detection">
 <h2>Hotspot detection<a class="headerlink" href="#Hotspot-detection" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1446,7 +1432,7 @@ E18(秋田): [北海道, 岩手, 秋田]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">

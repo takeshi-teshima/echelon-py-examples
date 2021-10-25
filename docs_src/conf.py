@@ -337,3 +337,8 @@ texinfo_documents = [
 # texinfo_no_detailmenu = False
 
 numfig = True
+
+nbsphinx_prolog = r"""
+{% set docname = env.doc2path(env.docname, base=None) %}
+Download this page as a Jupyter notebook :doc:`{{ docname }} <../{{ docname }}>`.
+"""

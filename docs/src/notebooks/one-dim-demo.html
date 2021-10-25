@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Two dimensional toy data (1)" href="two-dim-demo-1.html" />
-    <link rel="prev" title="Neumonia Tokyo Example" href="application-neumonia-Tokyo.html" /> 
+    <link rel="prev" title="US Unemployment Example" href="US-unemployment-rates-1997.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +43,6 @@
 <li class="toctree-l1"><a class="reference internal" href="Japan-population-example.html">Japan Population Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Japan-prefecture-example.html">Japan Prefecture Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="US-unemployment-rates-1997.html">US Unemployment Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo.html">Neumonia Tokyo Example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">One dimensional toy data</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Echelon-construction">Echelon construction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Echelon-dendrogram">Echelon dendrogram</a><ul>
@@ -354,26 +353,38 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
+<p>Download this page as a Jupyter notebook <span class="xref std std-doc">src/notebooks/one-dim-demo.ipynb</span>.</p>
 <div class="section" id="One-dimensional-toy-data">
 <h1>One dimensional toy data<a class="headerlink" href="#One-dimensional-toy-data" title="Permalink to this headline"></a></h1>
 <p>Example adopted from</p>
 <ul class="simple">
 <li><p>Kurihara K. (2004). Classification of geospatial lattice data and their graphical representation. Classification, Clustering, and Data Mining Applications, (Edited by D.Banks et al.) Springer, 251–258.</p></li>
 </ul>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># %load_ext autoreload</span>
 <span class="c1"># %autoreload 2</span>
-<span class="kn">import</span> <span class="nn">echelon</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">echelon</span>
 <span class="n">echelon</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -382,7 +393,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -396,7 +407,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Echelon-construction">
 <h2>Echelon construction<a class="headerlink" href="#Echelon-construction" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -407,28 +418,17 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/scipy/sparse/compressed.py:746: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil_matrix is more efficient.
-  SparseEfficiencyWarning)
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Result_EchelonAnalysis(peak_echelons=[[16, 17, 15], [13], [6, 5, 7], [3], [23]], foundation_echelons=[[12, 14, 18, 19, 11, 10, 20], [2, 4, 8], [1, 9, 21], [0, 22, 24]], hierarchy_tree=Node(&#39;/8&#39;), oracle=&lt;echelon.oracle.NdarrayEchelonOracle object at 0x7f89800acb00&gt;)
+Result_EchelonAnalysis(peak_echelons=[[16, 17, 15], [13], [6, 5, 7], [3], [23]], foundation_echelons=[[12, 14, 18, 19, 11, 10, 20], [2, 4, 8], [1, 9, 21], [0, 22, 24]], hierarchy_tree=Node(&#39;/8&#39;), oracle=&lt;echelon.oracle.NdarrayEchelonOracle object at 0x7f823011a588&gt;)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -480,7 +480,7 @@ Foundation Echelon 4
 <div class="section" id="Draw-with-numerical-indices">
 <h3>Draw with numerical indices<a class="headerlink" href="#Draw-with-numerical-indices" title="Permalink to this headline"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -526,7 +526,7 @@ E9(0,22,24): [24, 22, 0]
 <div class="section" id="Draw-with-alphabetical-labels-(using-custom-string-builder)">
 <h3>Draw with alphabetical labels (using custom string builder)<a class="headerlink" href="#Draw-with-alphabetical-labels-(using-custom-string-builder)" title="Permalink to this headline"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -583,7 +583,7 @@ E9(A,W,Y): [Y, W, A]
 <div class="section" id="Echelon-clusters">
 <h2>Echelon clusters<a class="headerlink" href="#Echelon-clusters" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -597,7 +597,7 @@ E9(A,W,Y): [Y, W, A]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -711,7 +711,7 @@ E9(A,W,Y): [Y, W, A]
 <div class="section" id="Hotspot-detection">
 <h2>Hotspot detection<a class="headerlink" href="#Hotspot-detection" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -720,7 +720,7 @@ E9(A,W,Y): [Y, W, A]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -893,7 +893,7 @@ E9(A,W,Y): [Y, W, A]
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="application-neumonia-Tokyo.html" class="btn btn-neutral float-left" title="Neumonia Tokyo Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="US-unemployment-rates-1997.html" class="btn btn-neutral float-left" title="US Unemployment Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="two-dim-demo-1.html" class="btn btn-neutral float-right" title="Two dimensional toy data (1)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

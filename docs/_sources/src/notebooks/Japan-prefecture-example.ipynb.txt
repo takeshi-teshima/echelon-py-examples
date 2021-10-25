@@ -20,6 +20,19 @@
    "cell_type": "code",
    "execution_count": 1,
    "metadata": {},
+   "outputs": [],
+   "source": [
+    "%load_ext autoreload\n",
+    "%autoreload 2\n",
+    "%matplotlib inline\n",
+    "import warnings\n",
+    "warnings.filterwarnings('ignore')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
    "outputs": [
     {
      "data": {
@@ -27,21 +40,19 @@
        "'1.0.3'"
       ]
      },
-     "execution_count": 1,
+     "execution_count": 2,
      "metadata": {},
      "output_type": "execute_result"
     }
    ],
    "source": [
-    "# %load_ext autoreload\n",
-    "# %autoreload 2\n",
     "import echelon\n",
     "echelon.__version__"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 2,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [
     {
@@ -456,7 +467,7 @@
        "46  47   沖縄                628                             [鹿児島]"
       ]
      },
-     "execution_count": 2,
+     "execution_count": 3,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -528,40 +539,16 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 3,
+   "execution_count": 4,
    "metadata": {},
    "outputs": [
     {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.\n",
-      "  arr = asarray(arr)\n",
-      "/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/scipy/sparse/compressed.py:746: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil_matrix is more efficient.\n",
-      "  SparseEfficiencyWarning)\n"
-     ]
-    },
-    {
      "data": {
       "text/plain": [
-       "Result_EchelonAnalysis(peak_echelons=[['東京', '神奈川', '埼玉', '千葉', '茨城'], ['大阪', '兵庫', '京都', '奈良', '滋賀'], ['愛知'], ['福岡', '佐賀', '長崎', '熊本'], ['沖縄'], ['香川'], ['広島'], ['宮城'], ['石川', '富山'], ['青森']], foundation_echelons=[['静岡'], ['三重', '群馬', '栃木'], ['岡山', '愛媛'], ['山口', '和歌山'], ['岐阜', '福井', '山梨', '大分', '新潟', '徳島'], ['鹿児島', '鳥取', '長野', '宮崎'], ['福島', '山形', '島根', '高知'], ['秋田', '岩手', '北海道']], hierarchy_tree=Node('/17'), oracle=<echelon.oracle.DataFrameEchelonOracle object at 0x7fee70042860>)"
+       "Result_EchelonAnalysis(peak_echelons=[['東京', '神奈川', '埼玉', '千葉', '茨城'], ['大阪', '兵庫', '京都', '奈良', '滋賀'], ['愛知'], ['福岡', '佐賀', '長崎', '熊本'], ['沖縄'], ['香川'], ['広島'], ['宮城'], ['石川', '富山'], ['青森']], foundation_echelons=[['静岡'], ['三重', '群馬', '栃木'], ['岡山', '愛媛'], ['山口', '和歌山'], ['岐阜', '福井', '山梨', '大分', '新潟', '徳島'], ['鹿児島', '鳥取', '長野', '宮崎'], ['福島', '山形', '島根', '高知'], ['秋田', '岩手', '北海道']], hierarchy_tree=Node('/17'), oracle=<echelon.oracle.DataFrameEchelonOracle object at 0x7f8d483a5198>)"
       ]
      },
-     "execution_count": 3,
+     "execution_count": 4,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -575,7 +562,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 4,
+   "execution_count": 5,
    "metadata": {},
    "outputs": [
     {
@@ -871,7 +858,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 5,
+   "execution_count": 6,
    "metadata": {},
    "outputs": [
     {
@@ -948,7 +935,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 6,
+   "execution_count": 7,
    "metadata": {},
    "outputs": [
     {
@@ -1207,7 +1194,7 @@
        "青森圏  青森   秋田  岩手  北海道                                              "
       ]
      },
-     "execution_count": 6,
+     "execution_count": 7,
      "metadata": {},
      "output_type": "execute_result"
     }
@@ -1227,7 +1214,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 7,
+   "execution_count": 8,
    "metadata": {},
    "outputs": [
     {
@@ -1520,7 +1507,7 @@
        "27    0.000000  "
       ]
      },
-     "execution_count": 7,
+     "execution_count": 8,
      "metadata": {},
      "output_type": "execute_result"
     }

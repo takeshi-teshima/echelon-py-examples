@@ -42,7 +42,6 @@
 <li class="toctree-l1"><a class="reference internal" href="Japan-population-example.html">Japan Population Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Japan-prefecture-example.html">Japan Prefecture Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="US-unemployment-rates-1997.html">US Unemployment Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo.html">Neumonia Tokyo Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="one-dim-demo.html">One dimensional toy data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="two-dim-demo-1.html">Two dimensional toy data (1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="two-dim-demo-2.html">Two dimensional toy data (2)</a></li>
@@ -352,26 +351,38 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
+<p>Download this page as a Jupyter notebook <span class="xref std std-doc">src/notebooks/two-dim-demo-3.ipynb</span>.</p>
 <div class="section" id="Two-dimensional-toy-data-(3)">
 <h1>Two dimensional toy data (3)<a class="headerlink" href="#Two-dimensional-toy-data-(3)" title="Permalink to this headline"></a></h1>
 <p>Example adopted from</p>
 <ul class="simple">
 <li><p>石岡文生, &amp; 栗原考次. (2012). Echelon 解析に基づくスキャン法による ホットスポット検出について. 統計数理, 60(1), 93–108.</p></li>
 </ul>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># %load_ext autoreload</span>
 <span class="c1"># %autoreload 2</span>
-<span class="kn">import</span> <span class="nn">echelon</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">echelon</span>
 <span class="n">echelon</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -380,7 +391,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -402,7 +413,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Echelon-construction">
 <h2>Echelon construction<a class="headerlink" href="#Echelon-construction" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -413,31 +424,20 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/numpy/lib/function_base.py:4454: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
-  arr = asarray(arr)
-/Users/teshima/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/scipy/sparse/compressed.py:746: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil_matrix is more efficient.
-  SparseEfficiencyWarning)
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Result_EchelonAnalysis(peak_echelons=[[21], [23], [5, 6, 2, 3, 4, 10, 1, 11], [12, 13]], foundation_echelons=[[22, 20, 18], [7, 8, 14, 19, 16, 9, 0, 15, 17]], hierarchy_tree=Node(&#39;/5&#39;), oracle=&lt;echelon.oracle.NdarrayEchelonOracle object at 0x7fd26810a588&gt;)
+Result_EchelonAnalysis(peak_echelons=[[21], [23], [5, 6, 2, 3, 4, 10, 1, 11], [12, 13]], foundation_echelons=[[22, 20, 18], [7, 8, 14, 19, 16, 9, 0, 15, 17]], hierarchy_tree=Node(&#39;/5&#39;), oracle=&lt;echelon.oracle.NdarrayEchelonOracle object at 0x7f97d01026a0&gt;)
 </pre></div></div>
 </div>
 </div>
 <div class="section" id="Echelon-dendrogram">
 <h2>Echelon dendrogram<a class="headerlink" href="#Echelon-dendrogram" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -471,7 +471,7 @@ E6(D2,A3,C4,D5): [B5, D4, A1, B3, A5, D5, C4, A3, D2]
 <div class="section" id="Echelon-clusters">
 <h2>Echelon clusters<a class="headerlink" href="#Echelon-clusters" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -485,7 +485,7 @@ E6(D2,A3,C4,D5): [B5, D4, A1, B3, A5, D5, C4, A3, D2]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -619,7 +619,7 @@ E6(D2,A3,C4,D5): [B5, D4, A1, B3, A5, D5, C4, A3, D2]
 <div class="section" id="Binomial-score">
 <h3>Binomial score<a class="headerlink" href="#Binomial-score" title="Permalink to this headline"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -843,7 +843,7 @@ Hotspot candidate 4
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
