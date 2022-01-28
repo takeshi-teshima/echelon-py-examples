@@ -391,7 +391,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;1.0.3&#39;
+&#39;1.1.0&#39;
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -864,7 +864,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Result_EchelonAnalysis(peak_echelons=[[&#39;AK&#39;], [&#39;WV&#39;], [&#39;HI&#39;, &#39;CA&#39;, &#39;OR&#39;], [&#39;NY&#39;], [&#39;NM&#39;], [&#39;LA&#39;, &#39;MS&#39;], [&#39;ME&#39;], [&#39;MT&#39;], [&#39;RI&#39;]], foundation_echelons=[[&#39;KY&#39;, &#39;TN&#39;, &#39;TX&#39;, &#39;AR&#39;], [&#39;ID&#39;, &#39;WY&#39;], [&#39;PA&#39;], [&#39;AL&#39;, &#39;NJ&#39;, &#39;MD&#39;, &#39;CT&#39;, &#39;FL&#39;, &#39;IL&#39;], [&#39;WA&#39;], [&#39;AZ&#39;, &#39;OH&#39;, &#39;GA&#39;, &#39;SC&#39;, &#39;MI&#39;, &#39;MO&#39;, &#39;OK&#39;, &#39;NV&#39;, &#39;VT&#39;, &#39;VA&#39;, &#39;MA&#39;, &#39;DE&#39;, &#39;KS&#39;, &#39;WI&#39;, &#39;NC&#39;, &#39;IN&#39;, &#39;IA&#39;, &#39;MN&#39;, &#39;CO&#39;], [&#39;NH&#39;, &#39;SD&#39;, &#39;UT&#39;, &#39;NE&#39;, &#39;ND&#39;]], hierarchy_tree=Node(&#39;/15&#39;), oracle=&lt;echelon.oracle.DataFrameEchelonOracle object at 0x7fb49022b240&gt;)
+Result_EchelonAnalysis(peak_echelons=[[&#39;AK&#39;], [&#39;WV&#39;], [&#39;HI&#39;, &#39;CA&#39;, &#39;OR&#39;], [&#39;NY&#39;], [&#39;NM&#39;], [&#39;LA&#39;, &#39;MS&#39;], [&#39;ME&#39;], [&#39;MT&#39;], [&#39;RI&#39;]], foundation_echelons=[[&#39;KY&#39;, &#39;TN&#39;, &#39;TX&#39;, &#39;AR&#39;], [&#39;ID&#39;, &#39;WY&#39;], [&#39;PA&#39;], [&#39;AL&#39;, &#39;MD&#39;, &#39;NJ&#39;, &#39;CT&#39;, &#39;FL&#39;, &#39;IL&#39;], [&#39;WA&#39;], [&#39;AZ&#39;, &#39;OH&#39;, &#39;GA&#39;, &#39;SC&#39;, &#39;MI&#39;, &#39;MO&#39;, &#39;OK&#39;, &#39;NV&#39;, &#39;MA&#39;, &#39;VA&#39;, &#39;VT&#39;, &#39;DE&#39;, &#39;KS&#39;, &#39;WI&#39;, &#39;NC&#39;, &#39;IN&#39;, &#39;IA&#39;, &#39;MN&#39;, &#39;CO&#39;], [&#39;NH&#39;, &#39;UT&#39;, &#39;SD&#39;, &#39;NE&#39;, &#39;ND&#39;]], hierarchy_tree=Node(&#39;/15&#39;), oracle=&lt;echelon.oracle.DataFrameEchelonOracle object at 0x7fb7f1721198&gt;)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1097,8 +1097,8 @@ Result_EchelonAnalysis(peak_echelons=[[&#39;AK&#39;], [&#39;WV&#39;], [&#39;HI&#
     <tr>
       <th>3</th>
       <td>AL</td>
-      <td>NJ</td>
       <td>MD</td>
+      <td>NJ</td>
       <td>CT</td>
       <td>FL</td>
       <td>IL</td>
@@ -1148,9 +1148,9 @@ Result_EchelonAnalysis(peak_echelons=[[&#39;AK&#39;], [&#39;WV&#39;], [&#39;HI&#
       <td>MO</td>
       <td>OK</td>
       <td>NV</td>
-      <td>VT</td>
-      <td>VA</td>
       <td>MA</td>
+      <td>VA</td>
+      <td>VT</td>
       <td>DE</td>
       <td>KS</td>
       <td>WI</td>
@@ -1163,8 +1163,8 @@ Result_EchelonAnalysis(peak_echelons=[[&#39;AK&#39;], [&#39;WV&#39;], [&#39;HI&#
     <tr>
       <th>6</th>
       <td>NH</td>
-      <td>SD</td>
       <td>UT</td>
+      <td>SD</td>
       <td>NE</td>
       <td>ND</td>
       <td></td>
@@ -1203,9 +1203,9 @@ Result_EchelonAnalysis(peak_echelons=[[&#39;AK&#39;], [&#39;WV&#39;], [&#39;HI&#
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-E16(NH,SD,UT): [ND, NE, UT, SD, NH]
+E16(NH,SD,UT): [ND, NE, SD, UT, NH]
  (max: 31)
-├── E15(AZ,OH): [CO, MN, IA, IN, NC, WI, KS, DE, MA, VA, VT, NV, OK, MO, MI, SC, GA, OH, AZ]
+├── E15(AZ,OH): [CO, MN, IA, IN, NC, WI, KS, DE, VT, VA, MA, NV, OK, MO, MI, SC, GA, OH, AZ]
 │    (max: 46)
 │   ├── E14(WA): [WA]
 │   │    (max: 48)
@@ -1217,7 +1217,7 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
 │   │   │        (max: 64)
 │   │   └── E1(AK): [AK]
 │   │        (max: 79)
-│   └── E13(AL,CT,MD,NJ): [IL, FL, CT, MD, NJ, AL]
+│   └── E13(AL,CT,MD,NJ): [IL, FL, CT, NJ, MD, AL]
 │        (max: 51)
 │       ├── E12(PA): [PA]
 │       │    (max: 52)
@@ -1380,8 +1380,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>AR</td>
       <td>PA</td>
       <td>AL</td>
-      <td>NJ</td>
       <td>MD</td>
+      <td>NJ</td>
       <td>FL</td>
       <td>IL</td>
       <td>OH</td>
@@ -1399,8 +1399,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>IA</td>
       <td>MN</td>
       <td>CO</td>
-      <td>SD</td>
       <td>UT</td>
+      <td>SD</td>
       <td>NE</td>
       <td>ND</td>
     </tr>
@@ -1415,8 +1415,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>AZ</td>
       <td>NV</td>
       <td>CO</td>
-      <td>SD</td>
       <td>UT</td>
+      <td>SD</td>
       <td>NE</td>
       <td>ND</td>
       <td></td>
@@ -1440,14 +1440,14 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <th>NY Zone</th>
       <td>NY</td>
       <td>PA</td>
-      <td>NJ</td>
       <td>MD</td>
+      <td>NJ</td>
       <td>CT</td>
       <td>OH</td>
       <td>MI</td>
-      <td>VT</td>
-      <td>VA</td>
       <td>MA</td>
+      <td>VA</td>
+      <td>VT</td>
       <td>DE</td>
       <td>WI</td>
       <td>NC</td>
@@ -1481,8 +1481,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>IA</td>
       <td>MN</td>
       <td>CO</td>
-      <td>SD</td>
       <td>UT</td>
+      <td>SD</td>
       <td>NE</td>
       <td>ND</td>
       <td></td>
@@ -1519,8 +1519,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>IA</td>
       <td>MN</td>
       <td>CO</td>
-      <td>SD</td>
       <td>UT</td>
+      <td>SD</td>
       <td>NE</td>
       <td>ND</td>
       <td></td>
@@ -1572,8 +1572,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>WA</td>
       <td>NV</td>
       <td>CO</td>
-      <td>SD</td>
       <td>UT</td>
+      <td>SD</td>
       <td>NE</td>
       <td>ND</td>
       <td></td>
@@ -1601,8 +1601,8 @@ E16(NH,SD,UT): [ND, NE, UT, SD, NH]
       <td>RI</td>
       <td>CT</td>
       <td>MA</td>
+      <td>VT</td>
       <td>NH</td>
-      <td></td>
       <td></td>
       <td></td>
       <td></td>
