@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lung Cancer New Mexico Example &mdash; echelon-py-examples  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Neumonia Tokyo Example" href="application-neumonia-Tokyo.html" />
+    <link rel="prev" title="Korea Earthquake Data Example" href="application-earthquake-Korea.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> echelon-py-examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Japan-population-example.html">Japan Population Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Japan-prefecture-example.html">Japan Prefecture Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="US-unemployment-rates-1997.html">US Unemployment Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-SIDS-NorthCarolina.html">SIDS application — NorthCarolina</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-earthquake-Korea.html">Korea Earthquake Data Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lung Cancer New Mexico Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Version-Information">Version Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Download-data">Download data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Load-Data">Load Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lung.cas:-lung-cancer-incidence-file">lung.cas: lung cancer incidence file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nm-m.pop:-background-population-file">nm-m.pop: background population file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nm-km.pop:-geographic-coordinates-file">nm-km.pop: geographic coordinates file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Shapefile-of-New-Mexico">Shapefile of New Mexico</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Format-Data">Format Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Define-adjacency">Define adjacency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Spatial-Adjacency">Spatial Adjacency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Temporal-Adjacency">Temporal Adjacency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Bonus">Bonus</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo.html">Neumonia Tokyo Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo-new.html">Neumonia Tokyo Example with echelon.contrib.geo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo-without-contrib.html">Neumonia Tokyo Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one-dim-demo.html">One dimensional toy data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-dim-demo-1.html">Two dimensional toy data (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-dim-demo-2.html">Two dimensional toy data (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-dim-demo-3.html">Two dimensional toy data (3)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">echelon-py-examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Lung Cancer New Mexico Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/notebooks/application-lung-cancer-NewMexico.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p>Download this page as a Jupyter notebook <span class="xref std std-doc">src/notebooks/application-lung-cancer-NewMexico.ipynb</span>.</p>
+<div class="section" id="Lung-Cancer-New-Mexico-Example">
+<h1>Lung Cancer New Mexico Example<a class="headerlink" href="#Lung-Cancer-New-Mexico-Example" title="Permalink to this headline"></a></h1>
+<p>Implemented with <code class="docutils literal notranslate"><span class="pre">echelon_py.contrib</span></code> functionalities.</p>
+<p>Data is acquired from:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.satscan.org/datasets/nmlung/">https://www.satscan.org/datasets/nmlung/</a></p>
+<ul>
+<li><p>Raw data files for analyzing the spatial and temporal distribution of lung cancer incidence in New Mexico, 1973 - 1991. Covariates included are age, race and sex.</p></li>
+</ul>
+</li>
+</ul>
+<p>The analysis is a partial reproduction of</p>
+<ul class="simple">
+<li><p>Kurihara, K., Ishioka, F., &amp; Kajinishi, S. (2020). Spatial and temporal clustering based on the echelon scan technique and software analysis. Japanese Journal of Statistics and Data Science, 3(1), 313–332.</p></li>
+</ul>
+<p>especially its Section 4.4.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[167]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div></div>
+</div>
+<div class="section" id="Version-Information">
+<h2>Version Information<a class="headerlink" href="#Version-Information" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[168]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">echelon</span>
+
+<span class="c1">## For shapefile -&gt; adjacency conversion</span>
+<span class="kn">import</span> <span class="nn">networkx</span>  <span class="c1"># For graph handling.</span>
+<span class="kn">import</span> <span class="nn">geopandas</span>  <span class="c1"># For reading shapefiles.</span>
+<span class="kn">import</span> <span class="nn">libpysal</span>  <span class="c1"># For constructing &quot;Queen&quot; neighborhoods.</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="c1"># # For some reason, NetworkX plot functionality (nx.draw()) seems to fail with a newer matplotlib:</span>
+<span class="c1"># # https://stackoverflow.com/questions/63198347/attributeerror-module-matplotlib-cbook-has-no-attribute-iterable</span>
+<span class="c1"># assert matplotlib.__version__ ==&#39;2.2.3&#39;</span>
+
+<span class="kn">import</span> <span class="nn">echelon.contrib.geo</span> <span class="k">as</span> <span class="nn">echelon_geo</span>
+
+<span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="p">[</span><span class="n">echelon</span><span class="p">,</span> <span class="n">networkx</span><span class="p">,</span> <span class="n">matplotlib</span><span class="p">,</span> <span class="n">geopandas</span><span class="p">,</span> <span class="n">libpysal</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+echelon 1.0.3
+networkx 2.6.3
+matplotlib 3.4.3
+geopandas 0.10.2
+libpysal 4.5.1
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Download-data">
+<h2>Download data<a class="headerlink" href="#Download-data" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[169]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1">## Configuration</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;data/lung-cancer-1&#39;</span><span class="p">)</span>
+<span class="n">data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">## Download data files</span>
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;nm_l_readme.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nm-km.geo&#39;</span><span class="p">,</span> <span class="s1">&#39;lung.cas&#39;</span><span class="p">,</span> <span class="s1">&#39;nm-m.pop&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">&#39;https://www.satscan.org/datasets/nmlung/&#39;</span> <span class="o">+</span> <span class="n">filename</span><span class="p">,</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">## Download Shapefile</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;2007fe_35_county00.original.zip&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="s1">&#39;http://gstore.unm.edu/apps/rgisarchive/datasets/609320d1-8d95-47a7-818f-64ca7bc66c3d/2007fe_35_county00.original.zip&#39;</span><span class="p">,</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">## Extract shapefile from zip</span>
+<span class="n">shapefile_name</span> <span class="o">=</span> <span class="s1">&#39;fe_2007_35_county00.shp&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">shapefile_name</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">zipfile</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+<span class="c1">## List data directory contents</span>
+<span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data_dir</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[169]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;fe_2007_35_county00.prj&#39;,
+ &#39;.DS_Store&#39;,
+ &#39;2007fe_35_county00.original.zip&#39;,
+ &#39;nm-m.pop&#39;,
+ &#39;fe_2007_35_county00.shp.xml&#39;,
+ &#39;nm-km.geo&#39;,
+ &#39;fe_2007_35_county00.shx&#39;,
+ &#39;fe_2007_35_county00.shp&#39;,
+ &#39;lung.cas&#39;,
+ &#39;nm_l_readme.txt&#39;,
+ &#39;fe_2007_35_county00.dbf&#39;]
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Load-Data">
+<h2>Load Data<a class="headerlink" href="#Load-Data" title="Permalink to this headline"></a></h2>
+<div class="section" id="lung.cas:-lung-cancer-incidence-file">
+<h3>lung.cas: lung cancer incidence file<a class="headerlink" href="#lung.cas:-lung-cancer-incidence-file" title="Permalink to this headline"></a></h3>
+<p>All lung cancer cases are malignant and were diagnosed during the 1973-1991 period.</p>
+<ul class="simple">
+<li><p>1st column: name of county (Note: In 1981, Valencia county was split into Cibola and Valencia counties. In this data, they are treated as one during the whole time period listed under Valencia.)</p></li>
+<li><p>2nd column: number cancer cases</p></li>
+<li><p>3rd column: Month of Diagnosis</p></li>
+</ul>
+<p>| January 1973 = 2001 | February 1973 = 2002 | etc.</p>
+<ul class="simple">
+<li><p>4th column: Age Group</p></li>
+</ul>
+<p>| 1 = ages &lt; 5 | 2 = ages 5-9 | 3 = ages 10-14 | 18 = ages 85+</p>
+<ul>
+<li><p>5th column: Sex</p>
+<div class="line-block">
+<div class="line">1 = Male</div>
+<div class="line">2 = Female</div>
+</div>
+</li>
+<li><p>Data Source: National Cancer Institutes Surveillance, Epidemiology and End Results (SEER) Program.</p></li>
+<li><p>Explanation excerpt from: <a class="reference external" href="https://www.satscan.org/datasets/nmlung/nm_l_readme.txt">https://www.satscan.org/datasets/nmlung/nm_l_readme.txt</a></p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[180]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+
+<span class="n">df_cases</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;lung.cas&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+           <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;cases&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span>
+           <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cases&#39;</span><span class="p">:</span> <span class="s1">&#39;Int64&#39;</span><span class="p">},</span>
+           <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">1973</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2001</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;age group&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;&lt; 5&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="o">+</span><span class="mi">4</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">)],</span> <span class="s1">&#39;85+&#39;</span><span class="p">][</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;female&#39;</span><span class="p">}[</span><span class="n">x</span><span class="p">]</span>
+           <span class="p">})</span>
+<span class="n">df_cases</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_cases</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Guadelupe&#39;</span><span class="p">,</span> <span class="s1">&#39;Guadalupe&#39;</span><span class="p">))</span>
+<span class="n">df_cases</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[180]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>county</th>
+      <th>cases</th>
+      <th>month</th>
+      <th>age group</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bernalillo</td>
+      <td>1</td>
+      <td>1973-01</td>
+      <td>40-44</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bernalillo</td>
+      <td>2</td>
+      <td>1973-01</td>
+      <td>45-49</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bernalillo</td>
+      <td>2</td>
+      <td>1973-01</td>
+      <td>50-54</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bernalillo</td>
+      <td>1</td>
+      <td>1973-01</td>
+      <td>50-54</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bernalillo</td>
+      <td>1</td>
+      <td>1973-01</td>
+      <td>65-69</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>7788</th>
+      <td>Valencia</td>
+      <td>1</td>
+      <td>1991-10</td>
+      <td>85+</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <th>7789</th>
+      <td>Valencia</td>
+      <td>1</td>
+      <td>1991-11</td>
+      <td>65-69</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <th>7790</th>
+      <td>Valencia</td>
+      <td>1</td>
+      <td>1991-11</td>
+      <td>70-74</td>
+      <td>female</td>
+    </tr>
+    <tr>
+      <th>7791</th>
+      <td>Valencia</td>
+      <td>1</td>
+      <td>1991-11</td>
+      <td>80-84</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>7792</th>
+      <td>Valencia</td>
+      <td>1</td>
+      <td>1991-12</td>
+      <td>65-69</td>
+      <td>female</td>
+    </tr>
+  </tbody>
+</table>
+<p>7793 rows × 5 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="nm-m.pop:-background-population-file">
+<h3>nm-m.pop: background population file<a class="headerlink" href="#nm-m.pop:-background-population-file" title="Permalink to this headline"></a></h3>
+<ul class="simple">
+<li><p>1st column: name of county</p></li>
+<li><p>2nd column: month</p></li>
+<li><p>3rd column: population, for that county, month, age group and sex (Note: Yearly population counts are from the census, and are assigned to July of each year.)</p></li>
+<li><p>4th column: age group</p></li>
+<li><p>5th column: sex</p></li>
+<li><p>Data Source: United States Census Bureau.</p></li>
+<li><p>Explanation excerpt from: <a class="reference external" href="https://www.satscan.org/datasets/nmlung/nm_l_readme.txt">https://www.satscan.org/datasets/nmlung/nm_l_readme.txt</a></p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[181]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df_population</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;nm-m.pop&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+            <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span>
+            <span class="n">converters</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">1973</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2001</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;age group&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;&lt; 5&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="o">+</span><span class="mi">4</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">)],</span> <span class="s1">&#39;85+&#39;</span><span class="p">][</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;female&#39;</span><span class="p">}[</span><span class="n">x</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># There is a blank line at the end (that is wrongly parsed without skipping)</span>
+           <span class="p">)</span>
+<span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Guadelupe&#39;</span><span class="p">,</span> <span class="s1">&#39;Guadalupe&#39;</span><span class="p">))</span>
+<span class="n">df_population</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])[</span><span class="s1">&#39;population&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[181]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>county</th>
+      <th>year</th>
+      <th>age group</th>
+      <th>sex</th>
+      <th>population</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bernalillo</td>
+      <td>1973</td>
+      <td>10-14</td>
+      <td>female</td>
+      <td>18827</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bernalillo</td>
+      <td>1973</td>
+      <td>10-14</td>
+      <td>male</td>
+      <td>19458</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bernalillo</td>
+      <td>1973</td>
+      <td>15-19</td>
+      <td>female</td>
+      <td>19121</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bernalillo</td>
+      <td>1973</td>
+      <td>15-19</td>
+      <td>male</td>
+      <td>18677</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bernalillo</td>
+      <td>1973</td>
+      <td>20-24</td>
+      <td>female</td>
+      <td>17636</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>21883</th>
+      <td>Valencia</td>
+      <td>1991</td>
+      <td>80-84</td>
+      <td>male</td>
+      <td>306</td>
+    </tr>
+    <tr>
+      <th>21884</th>
+      <td>Valencia</td>
+      <td>1991</td>
+      <td>85+</td>
+      <td>female</td>
+      <td>328</td>
+    </tr>
+    <tr>
+      <th>21885</th>
+      <td>Valencia</td>
+      <td>1991</td>
+      <td>85+</td>
+      <td>male</td>
+      <td>193</td>
+    </tr>
+    <tr>
+      <th>21886</th>
+      <td>Valencia</td>
+      <td>1991</td>
+      <td>&lt; 5</td>
+      <td>female</td>
+      <td>3021</td>
+    </tr>
+    <tr>
+      <th>21887</th>
+      <td>Valencia</td>
+      <td>1991</td>
+      <td>&lt; 5</td>
+      <td>male</td>
+      <td>3086</td>
+    </tr>
+  </tbody>
+</table>
+<p>21888 rows × 5 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="nm-km.pop:-geographic-coordinates-file">
+<h3>nm-km.pop: geographic coordinates file<a class="headerlink" href="#nm-km.pop:-geographic-coordinates-file" title="Permalink to this headline"></a></h3>
+<p><strong>This file is not used.</strong></p>
+<p>Geographic coordinate of the county seats in units of kilometers.</p>
+<ul class="simple">
+<li><p>Data Source: Rand McNally Cosmopolitan World Atlas</p></li>
+<li><p>Explanation excerpt from: <a class="reference external" href="https://www.satscan.org/datasets/nmlung/nm_l_readme.txt">https://www.satscan.org/datasets/nmlung/nm_l_readme.txt</a></p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[182]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+
+<span class="n">df_coord</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;nm-km.geo&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span>
+                       <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;coord_x&#39;</span><span class="p">,</span> <span class="s1">&#39;coord_y&#39;</span><span class="p">],</span>
+                      <span class="p">)</span>
+<span class="n">df_coord</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[182]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>county</th>
+      <th>coord_x</th>
+      <th>coord_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bernalillo</td>
+      <td>219</td>
+      <td>338</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Catron</td>
+      <td>27</td>
+      <td>189</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chaves</td>
+      <td>418</td>
+      <td>156</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="Shapefile-of-New-Mexico">
+<h3>Shapefile of New Mexico<a class="headerlink" href="#Shapefile-of-New-Mexico" title="Permalink to this headline"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[183]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">libpysal</span> <span class="kn">import</span> <span class="n">weights</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">shapefile_name</span><span class="p">)</span>
+
+<span class="c1">######</span>
+<span class="c1">## Combine Valencia and Cibola polygons.</span>
+<span class="c1">######</span>
+<span class="n">_Cibola</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;NAME00&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Cibola&#39;</span><span class="p">]</span>
+<span class="n">_Valencia</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;NAME00&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Valencia&#39;</span><span class="p">]</span>
+<span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">cascaded_union</span>
+<span class="n">gdf</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">_Valencia</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cascaded_union</span><span class="p">([</span>
+    <span class="n">_Valencia</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">_Cibola</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">])</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">_Cibola</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">######</span>
+
+<span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;NAME00&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;NAME00&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;NAME00&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="n">display</span><span class="p">(</span><span class="n">gdf</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">gdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;Eddy&#39; &#39;McKinley&#39; &#39;Socorro&#39; &#39;Colfax&#39; &#39;Catron&#39; &#39;Torrance&#39; &#39;Lea&#39; &#39;Luna&#39;
+ &#39;Grant&#39; &#39;SanMiguel&#39; &#39;Otero&#39; &#39;SantaFe&#39; &#39;DeBaca&#39; &#39;Chaves&#39; &#39;Roosevelt&#39;
+ &#39;Curry&#39; &#39;Hidalgo&#39; &#39;Valencia&#39; &#39;Union&#39; &#39;Bernalillo&#39; &#39;Lincoln&#39; &#39;Sierra&#39;
+ &#39;Sandoval&#39; &#39;SanJuan&#39; &#39;Guadalupe&#39; &#39;Quay&#39; &#39;RioArriba&#39; &#39;Taos&#39; &#39;Mora&#39;
+ &#39;Harding&#39; &#39;LosAlamos&#39; &#39;DonaAna&#39;]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>STATEFP00</th>
+      <th>COUNTYFP00</th>
+      <th>CNTYIDFP00</th>
+      <th>NAME00</th>
+      <th>NAMELSAD00</th>
+      <th>LSAD00</th>
+      <th>CLASSFP00</th>
+      <th>MTFCC00</th>
+      <th>UR00</th>
+      <th>FUNCSTAT00</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>35</td>
+      <td>015</td>
+      <td>35015</td>
+      <td>Eddy</td>
+      <td>Eddy County</td>
+      <td>06</td>
+      <td>H1</td>
+      <td>G4020</td>
+      <td>M</td>
+      <td>A</td>
+      <td>POLYGON ((-104.85155 32.36208, -104.85161 32.3...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>35</td>
+      <td>031</td>
+      <td>35031</td>
+      <td>McKinley</td>
+      <td>McKinley County</td>
+      <td>06</td>
+      <td>H1</td>
+      <td>G4020</td>
+      <td>M</td>
+      <td>A</td>
+      <td>POLYGON ((-108.87030 36.00266, -108.86314 36.0...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35</td>
+      <td>053</td>
+      <td>35053</td>
+      <td>Socorro</td>
+      <td>Socorro County</td>
+      <td>06</td>
+      <td>H1</td>
+      <td>G4020</td>
+      <td>M</td>
+      <td>A</td>
+      <td>POLYGON ((-107.71176 33.72561, -107.71178 33.7...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/src_notebooks_application-lung-cancer-NewMexico_14_2.png" src="../../_images/src_notebooks_application-lung-cancer-NewMexico_14_2.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Format-Data">
+<h2>Format Data<a class="headerlink" href="#Format-Data" title="Permalink to this headline"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[186]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df_cases_orig</span> <span class="o">=</span> <span class="n">df_cases</span>
+<span class="n">df_population_orig</span> <span class="o">=</span> <span class="n">df_population</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[211]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df_cases</span> <span class="o">=</span> <span class="n">df_cases_orig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_population</span> <span class="o">=</span> <span class="n">df_population_orig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">year_group_fn</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span>
+        <span class="p">(</span><span class="mi">1973</span><span class="p">,</span> <span class="mi">1975</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1976</span><span class="p">,</span> <span class="mi">1978</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1979</span><span class="p">,</span> <span class="mi">1981</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1982</span><span class="p">,</span> <span class="mi">1984</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">1987</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1988</span><span class="p">,</span> <span class="mi">1991</span><span class="p">)],</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">year</span> <span class="ow">and</span> <span class="n">year</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">_time</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_cases</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">])</span>
+<span class="n">df_cases</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_time</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+<span class="n">df_cases</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_cases</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">year_group_fn</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;Int64&#39;</span><span class="p">)</span>
+<span class="n">df_cases</span> <span class="o">=</span> <span class="n">df_cases</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_cases</span> <span class="o">=</span> <span class="n">df_cases</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;year_group&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_population</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">year_group_fn</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;Int64&#39;</span><span class="p">)</span>
+<span class="n">df_population</span> <span class="o">=</span> <span class="n">df_population</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Calculate SMR (observations to construct the echelons)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_population</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_cases</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;county&#39;</span><span class="p">])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])[</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])[</span><span class="s1">&#39;population&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">C</span> <span class="o">/</span> <span class="n">N</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;P&#39;</span><span class="p">}),</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;age group&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">])</span>
+<span class="n">Lambda</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;year_group&#39;</span><span class="p">])[[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">]]</span>
+          <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+          <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;lambda&#39;</span><span class="p">})</span>
+         <span class="p">)</span>
+<span class="n">Cases</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;year_group&#39;</span><span class="p">])[</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">Cases</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">Lambda</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">,</span> <span class="s1">&#39;year_group&#39;</span><span class="p">])</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;SMR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lambda&#39;</span><span class="p">]</span>
+<span class="c1"># data = data.drop([&#39;cases&#39;, &#39;lambda&#39;], axis=1)</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[211]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>county</th>
+      <th>year_group</th>
+      <th>cases</th>
+      <th>lambda</th>
+      <th>SMR</th>
+      <th>adjacency</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bernalillo</td>
+      <td>1</td>
+      <td>2790</td>
+      <td>3740.500145</td>
+      <td>0.745890</td>
+      <td>[0, 1, 141, 147, 171, 183]</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bernalillo</td>
+      <td>2</td>
+      <td>3519</td>
+      <td>4223.033901</td>
+      <td>0.833287</td>
+      <td>[0, 1, 2, 142, 148, 172, 184]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bernalillo</td>
+      <td>3</td>
+      <td>3879</td>
+      <td>4811.930520</td>
+      <td>0.806121</td>
+      <td>[1, 2, 3, 143, 149, 173, 185]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bernalillo</td>
+      <td>4</td>
+      <td>4356</td>
+      <td>5267.714546</td>
+      <td>0.826924</td>
+      <td>[2, 3, 4, 144, 150, 174, 186]</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bernalillo</td>
+      <td>5</td>
+      <td>4869</td>
+      <td>5787.776968</td>
+      <td>0.841256</td>
+      <td>[3, 4, 5, 145, 151, 175, 187]</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>Valencia</td>
+      <td>2</td>
+      <td>396</td>
+      <td>488.954362</td>
+      <td>0.809892</td>
+      <td>[1, 7, 94, 142, 160, 172, 183, 184, 185]</td>
+      <td>184</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>Valencia</td>
+      <td>3</td>
+      <td>840</td>
+      <td>585.089995</td>
+      <td>1.435677</td>
+      <td>[2, 8, 95, 143, 161, 173, 184, 185, 186]</td>
+      <td>185</td>
+    </tr>
+    <tr>
+      <th>186</th>
+      <td>Valencia</td>
+      <td>4</td>
+      <td>1404</td>
+      <td>614.507771</td>
+      <td>2.284755</td>
+      <td>[3, 9, 96, 144, 162, 174, 185, 186, 187]</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>Valencia</td>
+      <td>5</td>
+      <td>1728</td>
+      <td>742.053306</td>
+      <td>2.328674</td>
+      <td>[4, 10, 97, 145, 163, 175, 186, 187, 188]</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <th>188</th>
+      <td>Valencia</td>
+      <td>6</td>
+      <td>3048</td>
+      <td>1058.469489</td>
+      <td>2.879630</td>
+      <td>[5, 11, 98, 146, 164, 176, 187, 188]</td>
+      <td>188</td>
+    </tr>
+  </tbody>
+</table>
+<p>189 rows × 7 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="Define-adjacency">
+<h2>Define adjacency<a class="headerlink" href="#Define-adjacency" title="Permalink to this headline"></a></h2>
+<div class="section" id="Spatial-Adjacency">
+<h3>Spatial Adjacency<a class="headerlink" href="#Spatial-Adjacency" title="Permalink to this headline"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[222]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">echelon.contrib.geo</span> <span class="kn">import</span> <span class="n">GISAdjacency</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="n">adjacency</span> <span class="o">=</span> <span class="n">GISAdjacency</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">id_col</span><span class="o">=</span><span class="s1">&#39;NAME00&#39;</span><span class="p">)</span>
+<span class="n">adjacency_df</span> <span class="o">=</span> <span class="n">adjacency</span><span class="o">.</span><span class="n">to_series</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">adjacency_df</span><span class="p">)</span>
+<span class="n">Spatial_adjacency_dict</span> <span class="o">=</span> <span class="n">adjacency_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;NAME00&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()[</span><span class="s1">&#39;adjacency&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NAME00</th>
+      <th>adjacency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Eddy</td>
+      <td>[Otero, Chaves, Lea]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>McKinley</td>
+      <td>[Valencia, Sandoval, SanJuan]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Socorro</td>
+      <td>[Valencia, Lincoln, Catron, Torrance, Sierra]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Colfax</td>
+      <td>[Union, Taos, Mora, Harding]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Catron</td>
+      <td>[Grant, Valencia, Socorro, Sierra]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Torrance</td>
+      <td>[Valencia, Socorro, Bernalillo, Lincoln, Guada...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Lea</td>
+      <td>[Eddy, Chaves, Roosevelt]</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Luna</td>
+      <td>[Hidalgo, Grant, Sierra, DonaAna]</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Grant</td>
+      <td>[Hidalgo, Catron, Sierra, Luna]</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SanMiguel</td>
+      <td>[Torrance, Guadalupe, Quay, SantaFe, Mora, Har...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Otero</td>
+      <td>[Eddy, Lincoln, Sierra, Chaves, DonaAna]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>SantaFe</td>
+      <td>[Bernalillo, Torrance, Sandoval, SanMiguel, Ri...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>DeBaca</td>
+      <td>[Lincoln, Guadalupe, Quay, Chaves, Roosevelt]</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Chaves</td>
+      <td>[Eddy, Lincoln, Lea, Otero, DeBaca, Roosevelt]</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Roosevelt</td>
+      <td>[Lea, Quay, DeBaca, Chaves, Curry]</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Curry</td>
+      <td>[Quay, Roosevelt]</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Hidalgo</td>
+      <td>[Grant, Luna]</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Valencia</td>
+      <td>[McKinley, Socorro, Bernalillo, Catron, Torran...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Union</td>
+      <td>[Quay, Colfax, Harding]</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Bernalillo</td>
+      <td>[Valencia, SantaFe, Torrance, Sandoval]</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Lincoln</td>
+      <td>[Socorro, Torrance, Sierra, Guadalupe, Otero, ...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Sierra</td>
+      <td>[Socorro, Catron, Lincoln, Luna, Grant, Otero,...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Sandoval</td>
+      <td>[McKinley, Valencia, Bernalillo, SanJuan, RioA...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>SanJuan</td>
+      <td>[McKinley, RioArriba, Sandoval]</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Guadalupe</td>
+      <td>[Lincoln, Torrance, SanMiguel, DeBaca, Quay]</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Quay</td>
+      <td>[Union, Guadalupe, SanMiguel, DeBaca, Harding,...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>RioArriba</td>
+      <td>[Sandoval, SanJuan, SantaFe, Taos, Mora, LosAl...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Taos</td>
+      <td>[RioArriba, Colfax, Mora]</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Mora</td>
+      <td>[Colfax, Taos, SanMiguel, RioArriba, SantaFe, ...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Harding</td>
+      <td>[Union, Colfax, SanMiguel, Mora, Quay]</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>LosAlamos</td>
+      <td>[RioArriba, SantaFe, Sandoval]</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>DonaAna</td>
+      <td>[Otero, Sierra, Luna]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="Temporal-Adjacency">
+<h3>Temporal Adjacency<a class="headerlink" href="#Temporal-Adjacency" title="Permalink to this headline"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[224]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">year_groups</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">year_group</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">lag</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">Temporal_adjacency_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">year_group</span><span class="p">:</span> <span class="p">[</span><span class="n">_yg</span> <span class="k">for</span> <span class="n">_yg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">year_group</span><span class="o">-</span><span class="n">lag</span><span class="p">,</span> <span class="n">year_group</span><span class="o">+</span><span class="n">lag</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">_yg</span> <span class="ow">in</span> <span class="n">year_groups</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">year_group</span> <span class="ow">in</span> <span class="n">year_groups</span>
+<span class="p">}</span>
+<span class="n">Temporal_adjacency_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[224]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{1: [1, 2], 2: [1, 2, 3], 3: [2, 3, 4], 4: [3, 4, 5], 5: [4, 5, 6], 6: [5, 6]}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[228]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">## Same time + neighboring region = adjacent</span>
+<span class="c1">## Neighboring time + same region = adjacent</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;adjacency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span>
+                               <span class="n">data</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span>
+                                   <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span>
+                                       <span class="n">data</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Spatial_adjacency_dict</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]]),</span>
+                                       <span class="n">data</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">]</span>
+                                   <span class="p">),</span>
+                                   <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span>
+                                       <span class="n">data</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;county&#39;</span><span class="p">],</span>
+                                       <span class="n">data</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">Temporal_adjacency_dict</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;year_group&#39;</span><span class="p">]]),</span>
+                                   <span class="p">)</span>
+                               <span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">## We need a column to indicate the adjacency ID</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[228]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>county</th>
+      <th>year_group</th>
+      <th>cases</th>
+      <th>lambda</th>
+      <th>SMR</th>
+      <th>adjacency</th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Bernalillo</td>
+      <td>1</td>
+      <td>2790</td>
+      <td>3740.500145</td>
+      <td>0.745890</td>
+      <td>[0, 1, 141, 147, 171, 183]</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bernalillo</td>
+      <td>2</td>
+      <td>3519</td>
+      <td>4223.033901</td>
+      <td>0.833287</td>
+      <td>[0, 1, 2, 142, 148, 172, 184]</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bernalillo</td>
+      <td>3</td>
+      <td>3879</td>
+      <td>4811.930520</td>
+      <td>0.806121</td>
+      <td>[1, 2, 3, 143, 149, 173, 185]</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bernalillo</td>
+      <td>4</td>
+      <td>4356</td>
+      <td>5267.714546</td>
+      <td>0.826924</td>
+      <td>[2, 3, 4, 144, 150, 174, 186]</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bernalillo</td>
+      <td>5</td>
+      <td>4869</td>
+      <td>5787.776968</td>
+      <td>0.841256</td>
+      <td>[3, 4, 5, 145, 151, 175, 187]</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>Valencia</td>
+      <td>2</td>
+      <td>396</td>
+      <td>488.954362</td>
+      <td>0.809892</td>
+      <td>[1, 7, 94, 142, 160, 172, 183, 184, 185]</td>
+      <td>184</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>Valencia</td>
+      <td>3</td>
+      <td>840</td>
+      <td>585.089995</td>
+      <td>1.435677</td>
+      <td>[2, 8, 95, 143, 161, 173, 184, 185, 186]</td>
+      <td>185</td>
+    </tr>
+    <tr>
+      <th>186</th>
+      <td>Valencia</td>
+      <td>4</td>
+      <td>1404</td>
+      <td>614.507771</td>
+      <td>2.284755</td>
+      <td>[3, 9, 96, 144, 162, 174, 185, 186, 187]</td>
+      <td>186</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>Valencia</td>
+      <td>5</td>
+      <td>1728</td>
+      <td>742.053306</td>
+      <td>2.328674</td>
+      <td>[4, 10, 97, 145, 163, 175, 186, 187, 188]</td>
+      <td>187</td>
+    </tr>
+    <tr>
+      <th>188</th>
+      <td>Valencia</td>
+      <td>6</td>
+      <td>3048</td>
+      <td>1058.469489</td>
+      <td>2.879630</td>
+      <td>[5, 11, 98, 146, 164, 176, 187, 188]</td>
+      <td>188</td>
+    </tr>
+  </tbody>
+</table>
+<p>189 rows × 7 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[229]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">echelon.api</span> <span class="kn">import</span> <span class="n">DataFrameEchelonAnalysis</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">DataFrameEchelonAnalysis</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyzer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;SMR&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;adjacency&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">dendrogram</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+E37(143): [93, 95, 118, 97, 138, 148, 39, 130, 98, 149, 169, 142, 150, 120, 121, 73, 94, 133, 83, 129, 96, 135, 119, 0, 53, 151, 141, 165, 27, 170, 28, 147, 132, 143]
+ (max: 0.7852166611411063)
+
+├── E36(117): [168, 52, 167, 109, 139, 136, 36, 2, 108, 184, 183, 137, 3, 177, 22, 1, 4, 51, 37, 152, 144, 123, 50, 19, 70, 126, 122, 84, 117]
+│    (max: 0.9017577799285885)
+│
+│   ├── E35(86): [40, 145, 38, 79, 25, 42, 41, 24, 162, 106, 127, 153, 49, 86]
+│   │    (max: 0.9708709734171175)
+│   │
+│   │   ├── E34(12): [46, 75, 72, 18, 45, 157, 20, 26, 12]
+│   │   │    (max: 1.0199178749255364)
+│   │   │
+│   │   │   ├── E33(146): [107, 89, 111, 124, 13, 71, 112, 87, 91, 115, 166, 29, 43, 88, 16, 76, 146]
+│   │   │   │    (max: 1.1411018643956194)
+│   │   │   │
+│   │   │   │   ├── E32(100): [161, 5, 110, 44, 21, 156, 80, 48, 14, 90, 128, 15, 160, 125, 173, 179, 100]
+│   │   │   │   │    (max: 1.2645618913181815)
+│   │   │   │   │
+│   │   │   │   │   ├── E31(64): [180, 178, 140, 64]
+│   │   │   │   │   │    (max: 1.2866254390084944)
+│   │   │   │   │   │
+│   │   │   │   │   │   ├── E30(17): [113, 154, 164, 17]
+│   │   │   │   │   │   │    (max: 1.3293862887795076)
+│   │   │   │   │   │   │
+│   │   │   │   │   │   │   ├── E29(92): [78, 175, 163, 114, 23, 159, 185, 77, 92]
+│   │   │   │   │   │   │   │    (max: 1.4394114660935708)
+│   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │   ├── E28(67): [67]
+│   │   │   │   │   │   │   │   │    (max: 1.6205676813211913)
+│   │   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │   │   ├── E11(68): [68]
+│   │   │   │   │   │   │   │   │   │    (max: 2.2437350059999037)
+│   │   │   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │   │   └── E3(65): [66, 65]
+│   │   │   │   │   │   │   │   │        (max: 3.559212066295128)
+│   │   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │   └── E27(102): [158, 155, 172, 31, 171, 30, 102]
+│   │   │   │   │   │   │   │        (max: 1.6307574344619513)
+│   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │       ├── E26(116): [54, 176, 116]
+│   │   │   │   │   │   │   │       │    (max: 1.6913350061242831)
+│   │   │   │   │   │   │   │       │
+│   │   │   │   │   │   │   │       │   ├── E25(9): [9]
+│   │   │   │   │   │   │   │       │   │    (max: 1.715044793431145)
+│   │   │   │   │   │   │   │       │   │
+│   │   │   │   │   │   │   │       │   │   ├── E23(174): [174]
+│   │   │   │   │   │   │   │       │   │   │    (max: 1.7605055604160134)
+│   │   │   │   │   │   │   │       │   │   │
+│   │   │   │   │   │   │   │       │   │   │   ├── E22(56): [56]
+│   │   │   │   │   │   │   │       │   │   │   │    (max: 1.9839987578881058)
+│   │   │   │   │   │   │   │       │   │   │   │
+│   │   │   │   │   │   │   │       │   │   │   │   ├── E21(34): [59, 57, 34]
+│   │   │   │   │   │   │   │       │   │   │   │   │    (max: 2.2769708018263826)
+│   │   │   │   │   │   │   │       │   │   │   │   │
+│   │   │   │   │   │   │   │       │   │   │   │   │   ├── E7(33): [32, 33]
+│   │   │   │   │   │   │   │       │   │   │   │   │   │    (max: 2.843974192662301)
+│   │   │   │   │   │   │   │       │   │   │   │   │   │
+│   │   │   │   │   │   │   │       │   │   │   │   │   ├── E6(58): [58]
+│   │   │   │   │   │   │   │       │   │   │   │   │   │    (max: 2.8447119431021637)
+│   │   │   │   │   │   │   │       │   │   │   │   │   │
+│   │   │   │   │   │   │   │       │   │   │   │   │   └── E4(35): [35]
+│   │   │   │   │   │   │   │       │   │   │   │   │        (max: 3.244464768054658)
+│   │   │   │   │   │   │   │       │   │   │   │   │
+│   │   │   │   │   │   │   │       │   │   │   │   └── E12(55): [55]
+│   │   │   │   │   │   │   │       │   │   │   │        (max: 2.103408262366007)
+│   │   │   │   │   │   │   │       │   │   │   │
+│   │   │   │   │   │   │   │       │   │   │   └── E5(188): [10, 186, 187, 11, 188]
+│   │   │   │   │   │   │   │       │   │   │        (max: 2.879629531694099)
+│   │   │   │   │   │   │   │       │   │   │
+│   │   │   │   │   │   │   │       │   │   └── E1(6): [8, 7, 6]
+│   │   │   │   │   │   │   │       │   │        (max: 4.5189156086030104)
+│   │   │   │   │   │   │   │       │   │
+│   │   │   │   │   │   │   │       │   └── E24(181): [181]
+│   │   │   │   │   │   │   │       │        (max: 1.7199866458542956)
+│   │   │   │   │   │   │   │       │
+│   │   │   │   │   │   │   │       │       ├── E14(182): [182]
+│   │   │   │   │   │   │   │       │       │    (max: 1.9302995299854808)
+│   │   │   │   │   │   │   │       │       │
+│   │   │   │   │   │   │   │       │       └── E8(62): [104, 103, 62]
+│   │   │   │   │   │   │   │       │            (max: 2.75697290021181)
+│   │   │   │   │   │   │   │       │
+│   │   │   │   │   │   │   │       └── E2(60): [101, 61, 60]
+│   │   │   │   │   │   │   │            (max: 3.7010327823093387)
+│   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   └── E15(74): [47, 74]
+│   │   │   │   │   │   │        (max: 1.4928055609308601)
+│   │   │   │   │   │   │
+│   │   │   │   │   │   └── E13(63): [63]
+│   │   │   │   │   │        (max: 2.0205942131747716)
+│   │   │   │   │   │
+│   │   │   │   │   └── E10(99): [99]
+│   │   │   │   │        (max: 2.3797249772645452)
+│   │   │   │   │
+│   │   │   │   └── E16(134): [134]
+│   │   │   │        (max: 1.2122678600331642)
+│   │   │   │
+│   │   │   ├── E19(105): [105]
+│   │   │   │    (max: 1.025826842761947)
+│   │   │   │
+│   │   │   └── E18(69): [69]
+│   │   │        (max: 1.0861388600419042)
+│   │   │
+│   │   └── E17(85): [85]
+│   │        (max: 1.0920348764226635)
+│   │
+│   └── E9(82): [81, 82]
+│        (max: 2.4835456040480137)
+│
+└── E20(131): [131]
+     (max: 0.8871574468010444)
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[230]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hotspots</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">hotspots</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">,</span> <span class="s1">&#39;cases&#39;</span><span class="p">),</span> <span class="n">score</span><span class="o">=</span><span class="s1">&#39;binomial&#39;</span><span class="p">)</span>
+<span class="n">hotspots</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[230]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>spot</th>
+      <th>score</th>
+      <th>c(Z)</th>
+      <th>log_lambda</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>91</th>
+      <td>[100, 179, 173, 125, 160, 15, 128, 90, 14, 48,...</td>
+      <td>2853.782391</td>
+      <td>41186</td>
+      <td>2853.782391</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>[100, 179, 173, 125, 160, 15, 128, 90, 14, 48,...</td>
+      <td>2853.499930</td>
+      <td>41285</td>
+      <td>2853.499930</td>
+    </tr>
+    <tr>
+      <th>90</th>
+      <td>[100, 179, 173, 125, 160, 15, 128, 90, 14, 48,...</td>
+      <td>2853.282031</td>
+      <td>40988</td>
+      <td>2853.282031</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>[100, 179, 173, 125, 160, 15, 128, 90, 14, 48,...</td>
+      <td>2852.253340</td>
+      <td>41978</td>
+      <td>2852.253340</td>
+    </tr>
+    <tr>
+      <th>89</th>
+      <td>[100, 179, 173, 125, 160, 15, 128, 90, 14, 48,...</td>
+      <td>2850.701359</td>
+      <td>40619</td>
+      <td>2850.701359</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>[62]</td>
+      <td>3.391824</td>
+      <td>9</td>
+      <td>3.391824</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>[69]</td>
+      <td>1.894181</td>
+      <td>567</td>
+      <td>1.894181</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>[85]</td>
+      <td>0.678831</td>
+      <td>180</td>
+      <td>0.678831</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>[105]</td>
+      <td>0.084364</td>
+      <td>261</td>
+      <td>0.084364</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>[131]</td>
+      <td>0.000000</td>
+      <td>576</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>134 rows × 4 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[234]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">groupby_hotspots</span><span class="p">(</span><span class="n">hotspots</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">id_col</span><span class="p">):</span>
+    <span class="n">_out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="p">):</span>
+        <span class="n">_hotspots</span> <span class="o">=</span> <span class="n">hotspots</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">_hotspots</span><span class="p">[</span><span class="s1">&#39;spot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_hotspots</span><span class="p">[</span><span class="s1">&#39;spot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ids</span><span class="p">:</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">ids</span> <span class="k">if</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="n">id_col</span><span class="p">]])</span>
+        <span class="n">_out</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">_hotspots</span>
+    <span class="k">return</span> <span class="n">_out</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[235]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">_hotspots</span> <span class="ow">in</span> <span class="n">groupby_hotspots</span><span class="p">(</span><span class="n">hotspots</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;year_group&#39;</span><span class="p">,</span> <span class="n">id_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">plotter</span><span class="o">.</span><span class="n">plot_hotspot</span><span class="p">(</span><span class="n">_hotspots</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-235-158ca80c5496&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">for</span> val<span class="ansi-blue-fg">,</span> _hotspots <span class="ansi-green-fg">in</span> groupby_hotspots<span class="ansi-blue-fg">(</span>hotspots<span class="ansi-blue-fg">,</span> data<span class="ansi-blue-fg">,</span> by<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;year_group&#39;</span><span class="ansi-blue-fg">,</span> id_col<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#39;id&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span>     print<span class="ansi-blue-fg">(</span>val<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg">     </span>plotter<span class="ansi-blue-fg">.</span>plot_hotspot<span class="ansi-blue-fg">(</span>_hotspots<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: plot_hotspot() missing 1 required positional argument: &#39;label_col&#39;
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="Bonus">
+<h2>Bonus<a class="headerlink" href="#Bonus" title="Permalink to this headline"></a></h2>
+<p>Spatial adjacency plot</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[185]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">echelon.contrib.geo</span> <span class="kn">import</span> <span class="n">GISPlotter</span>
+
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">GISPlotter</span><span class="p">(</span><span class="n">gdf</span><span class="p">,</span> <span class="n">name_col</span><span class="o">=</span><span class="s1">&#39;NAME00&#39;</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">plot_adjacency</span><span class="p">(</span><span class="n">adjacency</span><span class="p">)</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/src_notebooks_application-lung-cancer-NewMexico_28_0.png" src="../../_images/src_notebooks_application-lung-cancer-NewMexico_28_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="application-earthquake-Korea.html" class="btn btn-neutral float-left" title="Korea Earthquake Data Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="application-neumonia-Tokyo.html" class="btn btn-neutral float-right" title="Neumonia Tokyo Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Takeshi Teshima.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

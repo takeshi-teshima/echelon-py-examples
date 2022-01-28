@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Japan Prefecture Example &mdash; echelon-py-examples  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="US Unemployment Example" href="US-unemployment-rates-1997.html" />
+    <link rel="prev" title="Japan Population Example" href="Japan-population-example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> echelon-py-examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Japan-population-example.html">Japan Population Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Japan Prefecture Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Echelon-construction">Echelon construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Echelon-dendrogram">Echelon dendrogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Echelon-clusters">Echelon clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Hotspot-detection">Hotspot detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="US-unemployment-rates-1997.html">US Unemployment Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-SIDS-NorthCarolina.html">SIDS application — NorthCarolina</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-earthquake-Korea.html">Korea Earthquake Data Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-lung-cancer-NewMexico.html">Lung Cancer New Mexico Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo.html">Neumonia Tokyo Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo-new.html">Neumonia Tokyo Example with echelon.contrib.geo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application-neumonia-Tokyo-without-contrib.html">Neumonia Tokyo Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="one-dim-demo.html">One dimensional toy data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-dim-demo-1.html">Two dimensional toy data (1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-dim-demo-2.html">Two dimensional toy data (2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-dim-demo-3.html">Two dimensional toy data (3)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">echelon-py-examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Japan Prefecture Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/src/notebooks/Japan-prefecture-example.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p>Download this page as a Jupyter notebook <span class="xref std std-doc">src/notebooks/Japan-prefecture-example.ipynb</span>.</p>
+<div class="section" id="Japan-Prefecture-Example">
+<h1>Japan Prefecture Example<a class="headerlink" href="#Japan-Prefecture-Example" title="Permalink to this headline"></a></h1>
+<p>Example adopted from</p>
+<ul class="simple">
+<li><p>栗原考次, &amp; 石岡文生. (2021). エシェロン解析: 階層化して視る時空間データ. 共立出版.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">echelon</span>
+<span class="n">echelon</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;1.0.3&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;北海道&#39;</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;青森&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;青森&#39;</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;北海道&#39;</span><span class="p">,</span> <span class="s1">&#39;岩手&#39;</span><span class="p">,</span> <span class="s1">&#39;秋田&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;岩手&#39;</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;青森&#39;</span><span class="p">,</span> <span class="s1">&#39;宮城&#39;</span><span class="p">,</span> <span class="s1">&#39;秋田&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;宮城&#39;</span><span class="p">,</span> <span class="mi">321</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;岩手&#39;</span><span class="p">,</span> <span class="s1">&#39;秋田&#39;</span><span class="p">,</span> <span class="s1">&#39;山形&#39;</span><span class="p">,</span> <span class="s1">&#39;福島&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;秋田&#39;</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;青森&#39;</span><span class="p">,</span> <span class="s1">&#39;岩手&#39;</span><span class="p">,</span> <span class="s1">&#39;宮城&#39;</span><span class="p">,</span> <span class="s1">&#39;山形&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;山形&#39;</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;宮城&#39;</span><span class="p">,</span> <span class="s1">&#39;秋田&#39;</span><span class="p">,</span> <span class="s1">&#39;福島&#39;</span><span class="p">,</span> <span class="s1">&#39;新潟&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;福島&#39;</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;宮城&#39;</span><span class="p">,</span> <span class="s1">&#39;山形&#39;</span><span class="p">,</span> <span class="s1">&#39;茨城&#39;</span><span class="p">,</span> <span class="s1">&#39;栃木&#39;</span><span class="p">,</span> <span class="s1">&#39;群馬&#39;</span><span class="p">,</span> <span class="s1">&#39;新潟&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;茨城&#39;</span><span class="p">,</span> <span class="mi">478</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福島&#39;</span><span class="p">,</span> <span class="s1">&#39;栃木&#39;</span><span class="p">,</span> <span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="s1">&#39;千葉&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;栃木&#39;</span><span class="p">,</span> <span class="mi">308</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福島&#39;</span><span class="p">,</span> <span class="s1">&#39;茨城&#39;</span><span class="p">,</span> <span class="s1">&#39;群馬&#39;</span><span class="p">,</span> <span class="s1">&#39;埼玉&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;群馬&#39;</span><span class="p">,</span> <span class="mi">310</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福島&#39;</span><span class="p">,</span> <span class="s1">&#39;栃木&#39;</span><span class="p">,</span> <span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="s1">&#39;新潟&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="mi">1913</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;茨城&#39;</span><span class="p">,</span> <span class="s1">&#39;栃木&#39;</span><span class="p">,</span> <span class="s1">&#39;群馬&#39;</span><span class="p">,</span> <span class="s1">&#39;千葉&#39;</span><span class="p">,</span> <span class="s1">&#39;東京&#39;</span><span class="p">,</span> <span class="s1">&#39;山梨&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;千葉&#39;</span><span class="p">,</span> <span class="mi">1207</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;茨城&#39;</span><span class="p">,</span> <span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="s1">&#39;東京&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;東京&#39;</span><span class="p">,</span> <span class="mi">6169</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="s1">&#39;千葉&#39;</span><span class="p">,</span> <span class="s1">&#39;神奈川&#39;</span><span class="p">,</span> <span class="s1">&#39;山梨&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s1">&#39;神奈川&#39;</span><span class="p">,</span> <span class="mi">3778</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;東京&#39;</span><span class="p">,</span> <span class="s1">&#39;山梨&#39;</span><span class="p">,</span> <span class="s1">&#39;静岡&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;新潟&#39;</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;山形&#39;</span><span class="p">,</span> <span class="s1">&#39;福島&#39;</span><span class="p">,</span> <span class="s1">&#39;群馬&#39;</span><span class="p">,</span> <span class="s1">&#39;富山&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;富山&#39;</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;新潟&#39;</span><span class="p">,</span> <span class="s1">&#39;石川&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;石川&#39;</span><span class="p">,</span> <span class="mi">276</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;富山&#39;</span><span class="p">,</span> <span class="s1">&#39;福井&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="s1">&#39;福井&#39;</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;石川&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">,</span> <span class="s1">&#39;滋賀&#39;</span><span class="p">,</span> <span class="s1">&#39;京都&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;山梨&#39;</span><span class="p">,</span> <span class="mi">187</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="s1">&#39;東京&#39;</span><span class="p">,</span> <span class="s1">&#39;神奈川&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">,</span> <span class="s1">&#39;静岡&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;群馬&#39;</span><span class="p">,</span> <span class="s1">&#39;埼玉&#39;</span><span class="p">,</span> <span class="s1">&#39;新潟&#39;</span><span class="p">,</span> <span class="s1">&#39;富山&#39;</span><span class="p">,</span> <span class="s1">&#39;山梨&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">,</span> <span class="s1">&#39;静岡&#39;</span><span class="p">,</span> <span class="s1">&#39;愛知&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;富山&#39;</span><span class="p">,</span> <span class="s1">&#39;石川&#39;</span><span class="p">,</span> <span class="s1">&#39;福井&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">,</span> <span class="s1">&#39;愛知&#39;</span><span class="p">,</span> <span class="s1">&#39;三重&#39;</span><span class="p">,</span> <span class="s1">&#39;滋賀&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="s1">&#39;静岡&#39;</span><span class="p">,</span> <span class="mi">476</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;神奈川&#39;</span><span class="p">,</span> <span class="s1">&#39;山梨&#39;</span><span class="p">,</span> <span class="s1">&#39;長野&#39;</span><span class="p">,</span> <span class="s1">&#39;愛知&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="s1">&#39;愛知&#39;</span><span class="p">,</span> <span class="mi">1447</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;長野&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">,</span> <span class="s1">&#39;静岡&#39;</span><span class="p">,</span> <span class="s1">&#39;三重&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;三重&#39;</span><span class="p">,</span> <span class="mi">315</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;岐阜&#39;</span><span class="p">,</span> <span class="s1">&#39;愛知&#39;</span><span class="p">,</span> <span class="s1">&#39;滋賀&#39;</span><span class="p">,</span> <span class="s1">&#39;京都&#39;</span><span class="p">,</span> <span class="s1">&#39;奈良&#39;</span><span class="p">,</span> <span class="s1">&#39;和歌山&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;滋賀&#39;</span><span class="p">,</span> <span class="mi">352</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福井&#39;</span><span class="p">,</span> <span class="s1">&#39;岐阜&#39;</span><span class="p">,</span> <span class="s1">&#39;三重&#39;</span><span class="p">,</span> <span class="s1">&#39;京都&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="s1">&#39;京都&#39;</span><span class="p">,</span> <span class="mi">566</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福井&#39;</span><span class="p">,</span> <span class="s1">&#39;三重&#39;</span><span class="p">,</span> <span class="s1">&#39;滋賀&#39;</span><span class="p">,</span> <span class="s1">&#39;大阪&#39;</span><span class="p">,</span> <span class="s1">&#39;兵庫&#39;</span><span class="p">,</span> <span class="s1">&#39;奈良&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="s1">&#39;大阪&#39;</span><span class="p">,</span> <span class="mi">4640</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;京都&#39;</span><span class="p">,</span> <span class="s1">&#39;兵庫&#39;</span><span class="p">,</span> <span class="s1">&#39;奈良&#39;</span><span class="p">,</span> <span class="s1">&#39;和歌山&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="s1">&#39;兵庫&#39;</span><span class="p">,</span> <span class="mi">659</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;京都&#39;</span><span class="p">,</span> <span class="s1">&#39;大阪&#39;</span><span class="p">,</span> <span class="s1">&#39;鳥取&#39;</span><span class="p">,</span> <span class="s1">&#39;岡山&#39;</span><span class="p">,</span> <span class="s1">&#39;徳島&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="s1">&#39;奈良&#39;</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;三重&#39;</span><span class="p">,</span> <span class="s1">&#39;京都&#39;</span><span class="p">,</span> <span class="s1">&#39;大阪&#39;</span><span class="p">,</span> <span class="s1">&#39;和歌山&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;和歌山&#39;</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;三重&#39;</span><span class="p">,</span> <span class="s1">&#39;大阪&#39;</span><span class="p">,</span> <span class="s1">&#39;奈良&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;鳥取&#39;</span><span class="p">,</span> <span class="mi">164</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;兵庫&#39;</span><span class="p">,</span> <span class="s1">&#39;島根&#39;</span><span class="p">,</span> <span class="s1">&#39;岡山&#39;</span><span class="p">,</span> <span class="s1">&#39;広島&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;島根&#39;</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;鳥取&#39;</span><span class="p">,</span> <span class="s1">&#39;広島&#39;</span><span class="p">,</span> <span class="s1">&#39;山口&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;岡山&#39;</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;兵庫&#39;</span><span class="p">,</span> <span class="s1">&#39;鳥取&#39;</span><span class="p">,</span> <span class="s1">&#39;広島&#39;</span><span class="p">,</span> <span class="s1">&#39;香川&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="s1">&#39;広島&#39;</span><span class="p">,</span> <span class="mi">335</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;鳥取&#39;</span><span class="p">,</span> <span class="s1">&#39;島根&#39;</span><span class="p">,</span> <span class="s1">&#39;岡山&#39;</span><span class="p">,</span> <span class="s1">&#39;山口&#39;</span><span class="p">,</span> <span class="s1">&#39;愛媛&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="s1">&#39;山口&#39;</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;島根&#39;</span><span class="p">,</span> <span class="s1">&#39;広島&#39;</span><span class="p">,</span> <span class="s1">&#39;福岡&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="s1">&#39;徳島&#39;</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;兵庫&#39;</span><span class="p">,</span> <span class="s1">&#39;香川&#39;</span><span class="p">,</span> <span class="s1">&#39;愛媛&#39;</span><span class="p">,</span> <span class="s1">&#39;高知&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="s1">&#39;香川&#39;</span><span class="p">,</span> <span class="mi">520</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;岡山&#39;</span><span class="p">,</span> <span class="s1">&#39;徳島&#39;</span><span class="p">,</span> <span class="s1">&#39;愛媛&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="s1">&#39;愛媛&#39;</span><span class="p">,</span> <span class="mi">244</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;広島&#39;</span><span class="p">,</span> <span class="s1">&#39;徳島&#39;</span><span class="p">,</span> <span class="s1">&#39;香川&#39;</span><span class="p">,</span> <span class="s1">&#39;高知&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">39</span><span class="p">,</span> <span class="s1">&#39;高知&#39;</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;徳島&#39;</span><span class="p">,</span> <span class="s1">&#39;愛媛&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="s1">&#39;福岡&#39;</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;山口&#39;</span><span class="p">,</span> <span class="s1">&#39;佐賀&#39;</span><span class="p">,</span> <span class="s1">&#39;熊本&#39;</span><span class="p">,</span> <span class="s1">&#39;大分&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="s1">&#39;佐賀&#39;</span><span class="p">,</span> <span class="mi">341</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福岡&#39;</span><span class="p">,</span> <span class="s1">&#39;長崎&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;長崎&#39;</span><span class="p">,</span> <span class="mi">333</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;佐賀&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">43</span><span class="p">,</span> <span class="s1">&#39;熊本&#39;</span><span class="p">,</span> <span class="mi">241</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福岡&#39;</span><span class="p">,</span> <span class="s1">&#39;大分&#39;</span><span class="p">,</span> <span class="s1">&#39;宮崎&#39;</span><span class="p">,</span> <span class="s1">&#39;鹿児島&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="s1">&#39;大分&#39;</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;福岡&#39;</span><span class="p">,</span> <span class="s1">&#39;熊本&#39;</span><span class="p">,</span> <span class="s1">&#39;宮崎&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="s1">&#39;宮崎&#39;</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;熊本&#39;</span><span class="p">,</span> <span class="s1">&#39;大分&#39;</span><span class="p">,</span> <span class="s1">&#39;鹿児島&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">46</span><span class="p">,</span> <span class="s1">&#39;鹿児島&#39;</span><span class="p">,</span> <span class="mi">179</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;熊本&#39;</span><span class="p">,</span> <span class="s1">&#39;宮崎&#39;</span><span class="p">,</span> <span class="s1">&#39;沖縄&#39;</span><span class="p">]),</span>
+    <span class="p">(</span><span class="mi">47</span><span class="p">,</span> <span class="s1">&#39;沖縄&#39;</span><span class="p">,</span> <span class="mi">628</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;鹿児島&#39;</span><span class="p">]),</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;density (ppl/km2)&#39;</span><span class="p">,</span> <span class="s1">&#39;adjacent&#39;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>density (ppl/km2)</th>
+      <th>adjacent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>北海道</td>
+      <td>69</td>
+      <td>[青森]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>青森</td>
+      <td>136</td>
+      <td>[北海道, 岩手, 秋田]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>岩手</td>
+      <td>84</td>
+      <td>[青森, 宮城, 秋田]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>宮城</td>
+      <td>321</td>
+      <td>[岩手, 秋田, 山形, 福島]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>秋田</td>
+      <td>88</td>
+      <td>[青森, 岩手, 宮城, 山形]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>山形</td>
+      <td>121</td>
+      <td>[宮城, 秋田, 福島, 新潟]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>福島</td>
+      <td>139</td>
+      <td>[宮城, 山形, 茨城, 栃木, 群馬, 新潟]</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>茨城</td>
+      <td>478</td>
+      <td>[福島, 栃木, 埼玉, 千葉]</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>栃木</td>
+      <td>308</td>
+      <td>[福島, 茨城, 群馬, 埼玉]</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>群馬</td>
+      <td>310</td>
+      <td>[福島, 栃木, 埼玉, 新潟, 長野]</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>埼玉</td>
+      <td>1913</td>
+      <td>[茨城, 栃木, 群馬, 千葉, 東京, 山梨, 長野]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>千葉</td>
+      <td>1207</td>
+      <td>[茨城, 埼玉, 東京]</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>東京</td>
+      <td>6169</td>
+      <td>[埼玉, 千葉, 神奈川, 山梨]</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>神奈川</td>
+      <td>3778</td>
+      <td>[東京, 山梨, 静岡]</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>新潟</td>
+      <td>183</td>
+      <td>[山形, 福島, 群馬, 富山, 長野]</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>富山</td>
+      <td>251</td>
+      <td>[新潟, 石川, 長野, 岐阜]</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>石川</td>
+      <td>276</td>
+      <td>[富山, 福井, 岐阜]</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>福井</td>
+      <td>188</td>
+      <td>[石川, 岐阜, 滋賀, 京都]</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>山梨</td>
+      <td>187</td>
+      <td>[埼玉, 東京, 神奈川, 長野, 静岡]</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>長野</td>
+      <td>155</td>
+      <td>[群馬, 埼玉, 新潟, 富山, 山梨, 岐阜, 静岡, 愛知]</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>岐阜</td>
+      <td>191</td>
+      <td>[富山, 石川, 福井, 長野, 愛知, 三重, 滋賀]</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>静岡</td>
+      <td>476</td>
+      <td>[神奈川, 山梨, 長野, 愛知]</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>愛知</td>
+      <td>1447</td>
+      <td>[長野, 岐阜, 静岡, 三重]</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>三重</td>
+      <td>315</td>
+      <td>[岐阜, 愛知, 滋賀, 京都, 奈良, 和歌山]</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>滋賀</td>
+      <td>352</td>
+      <td>[福井, 岐阜, 三重, 京都]</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>26</td>
+      <td>京都</td>
+      <td>566</td>
+      <td>[福井, 三重, 滋賀, 大阪, 兵庫, 奈良]</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27</td>
+      <td>大阪</td>
+      <td>4640</td>
+      <td>[京都, 兵庫, 奈良, 和歌山]</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>兵庫</td>
+      <td>659</td>
+      <td>[京都, 大阪, 鳥取, 岡山, 徳島]</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>奈良</td>
+      <td>370</td>
+      <td>[三重, 京都, 大阪, 和歌山]</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>和歌山</td>
+      <td>204</td>
+      <td>[三重, 大阪, 奈良]</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>31</td>
+      <td>鳥取</td>
+      <td>164</td>
+      <td>[兵庫, 島根, 岡山, 広島]</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>32</td>
+      <td>島根</td>
+      <td>104</td>
+      <td>[鳥取, 広島, 山口]</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33</td>
+      <td>岡山</td>
+      <td>270</td>
+      <td>[兵庫, 鳥取, 広島, 香川]</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>34</td>
+      <td>広島</td>
+      <td>335</td>
+      <td>[鳥取, 島根, 岡山, 山口, 愛媛]</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>35</td>
+      <td>山口</td>
+      <td>230</td>
+      <td>[島根, 広島, 福岡]</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36</td>
+      <td>徳島</td>
+      <td>182</td>
+      <td>[兵庫, 香川, 愛媛, 高知]</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>37</td>
+      <td>香川</td>
+      <td>520</td>
+      <td>[岡山, 徳島, 愛媛]</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>愛媛</td>
+      <td>244</td>
+      <td>[広島, 徳島, 香川, 高知]</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>39</td>
+      <td>高知</td>
+      <td>103</td>
+      <td>[徳島, 愛媛]</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>福岡</td>
+      <td>1023</td>
+      <td>[山口, 佐賀, 熊本, 大分]</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>41</td>
+      <td>佐賀</td>
+      <td>341</td>
+      <td>[福岡, 長崎]</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>42</td>
+      <td>長崎</td>
+      <td>333</td>
+      <td>[佐賀]</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>43</td>
+      <td>熊本</td>
+      <td>241</td>
+      <td>[福岡, 大分, 宮崎, 鹿児島]</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>44</td>
+      <td>大分</td>
+      <td>184</td>
+      <td>[福岡, 熊本, 宮崎]</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>45</td>
+      <td>宮崎</td>
+      <td>143</td>
+      <td>[熊本, 大分, 鹿児島]</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>46</td>
+      <td>鹿児島</td>
+      <td>179</td>
+      <td>[熊本, 宮崎, 沖縄]</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>47</td>
+      <td>沖縄</td>
+      <td>628</td>
+      <td>[鹿児島]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="section" id="Echelon-construction">
+<h2>Echelon construction<a class="headerlink" href="#Echelon-construction" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">echelon.api</span> <span class="kn">import</span> <span class="n">DataFrameEchelonAnalysis</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">DataFrameEchelonAnalysis</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">analyzer</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;density (ppl/km2)&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;adjacent&#39;</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Result_EchelonAnalysis(peak_echelons=[[&#39;東京&#39;, &#39;神奈川&#39;, &#39;埼玉&#39;, &#39;千葉&#39;, &#39;茨城&#39;], [&#39;大阪&#39;, &#39;兵庫&#39;, &#39;京都&#39;, &#39;奈良&#39;, &#39;滋賀&#39;], [&#39;愛知&#39;], [&#39;福岡&#39;, &#39;佐賀&#39;, &#39;長崎&#39;, &#39;熊本&#39;], [&#39;沖縄&#39;], [&#39;香川&#39;], [&#39;広島&#39;], [&#39;宮城&#39;], [&#39;石川&#39;, &#39;富山&#39;], [&#39;青森&#39;]], foundation_echelons=[[&#39;静岡&#39;], [&#39;三重&#39;, &#39;群馬&#39;, &#39;栃木&#39;], [&#39;岡山&#39;, &#39;愛媛&#39;], [&#39;山口&#39;, &#39;和歌山&#39;], [&#39;岐阜&#39;, &#39;福井&#39;, &#39;山梨&#39;, &#39;大分&#39;, &#39;新潟&#39;, &#39;徳島&#39;], [&#39;鹿児島&#39;, &#39;鳥取&#39;, &#39;長野&#39;, &#39;宮崎&#39;], [&#39;福島&#39;, &#39;山形&#39;, &#39;島根&#39;, &#39;高知&#39;], [&#39;秋田&#39;, &#39;岩手&#39;, &#39;北海道&#39;]], hierarchy_tree=Node(&#39;/17&#39;), oracle=&lt;echelon.oracle.DataFrameEchelonOracle object at 0x7f8d483a5198&gt;)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;### Peak Echelons&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">peak_echelons</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="s1">&#39;### Foundation Echelons&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">foundation_echelons</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="section" id="Peak-Echelons">
+<h3>Peak Echelons<a class="headerlink" href="#Peak-Echelons" title="Permalink to this headline"></a></h3>
+</div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>東京</td>
+      <td>神奈川</td>
+      <td>埼玉</td>
+      <td>千葉</td>
+      <td>茨城</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>大阪</td>
+      <td>兵庫</td>
+      <td>京都</td>
+      <td>奈良</td>
+      <td>滋賀</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>愛知</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>福岡</td>
+      <td>佐賀</td>
+      <td>長崎</td>
+      <td>熊本</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>沖縄</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>香川</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>広島</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>宮城</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>石川</td>
+      <td>富山</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>青森</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="section" id="Foundation-Echelons">
+<h3>Foundation Echelons<a class="headerlink" href="#Foundation-Echelons" title="Permalink to this headline"></a></h3>
+</div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>静岡</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>三重</td>
+      <td>群馬</td>
+      <td>栃木</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>岡山</td>
+      <td>愛媛</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>山口</td>
+      <td>和歌山</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>岐阜</td>
+      <td>福井</td>
+      <td>山梨</td>
+      <td>大分</td>
+      <td>新潟</td>
+      <td>徳島</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>鹿児島</td>
+      <td>鳥取</td>
+      <td>長野</td>
+      <td>宮崎</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>福島</td>
+      <td>山形</td>
+      <td>島根</td>
+      <td>高知</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>秋田</td>
+      <td>岩手</td>
+      <td>北海道</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="Echelon-dendrogram">
+<h2>Echelon dendrogram<a class="headerlink" href="#Echelon-dendrogram" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">dendrogram</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+E18(秋田): [北海道, 岩手, 秋田]
+ (max: 88)
+
+├── E17(福島): [高知, 島根, 山形, 福島]
+│    (max: 139)
+│
+│   ├── E16(鹿児島): [宮崎, 長野, 鳥取, 鹿児島]
+│   │    (max: 179)
+│   │
+│   │   ├── E15(岐阜): [徳島, 新潟, 大分, 山梨, 福井, 岐阜]
+│   │   │    (max: 191)
+│   │   │
+│   │   │   ├── E14(山口): [和歌山, 山口]
+│   │   │   │    (max: 230)
+│   │   │   │
+│   │   │   │   ├── E13(岡山): [愛媛, 岡山]
+│   │   │   │   │    (max: 270)
+│   │   │   │   │
+│   │   │   │   │   ├── E12(三重): [栃木, 群馬, 三重]
+│   │   │   │   │   │    (max: 315)
+│   │   │   │   │   │
+│   │   │   │   │   │   ├── E11(静岡): [静岡]
+│   │   │   │   │   │   │    (max: 476)
+│   │   │   │   │   │   │
+│   │   │   │   │   │   │   ├── E3(愛知): [愛知]
+│   │   │   │   │   │   │   │    (max: 1447)
+│   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   └── E1(東京): [茨城, 千葉, 埼玉, 神奈川, 東京]
+│   │   │   │   │   │   │        (max: 6169)
+│   │   │   │   │   │   │
+│   │   │   │   │   │   └── E2(大阪): [滋賀, 奈良, 京都, 兵庫, 大阪]
+│   │   │   │   │   │        (max: 4640)
+│   │   │   │   │   │
+│   │   │   │   │   ├── E7(広島): [広島]
+│   │   │   │   │   │    (max: 335)
+│   │   │   │   │   │
+│   │   │   │   │   └── E6(香川): [香川]
+│   │   │   │   │        (max: 520)
+│   │   │   │   │
+│   │   │   │   └── E4(福岡): [熊本, 長崎, 佐賀, 福岡]
+│   │   │   │        (max: 1023)
+│   │   │   │
+│   │   │   └── E9(石川): [富山, 石川]
+│   │   │        (max: 276)
+│   │   │
+│   │   └── E5(沖縄): [沖縄]
+│   │        (max: 628)
+│   │
+│   └── E8(宮城): [宮城]
+│        (max: 321)
+│
+└── E10(青森): [青森]
+     (max: 136)
+
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Echelon-clusters">
+<h2>Echelon clusters<a class="headerlink" href="#Echelon-clusters" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">_df</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">cluster</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">_df</span><span class="p">[</span><span class="s1">&#39;representatives&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_df</span><span class="p">[</span><span class="s1">&#39;representatives&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;圏&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">_df</span><span class="p">[</span><span class="s1">&#39;indices&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">_df</span><span class="p">[</span><span class="s1">&#39;representatives&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;圏&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+    </tr>
+    <tr>
+      <th>圏</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>東京圏</th>
+      <td>東京</td>
+      <td>神奈川</td>
+      <td>埼玉</td>
+      <td>千葉</td>
+      <td>茨城</td>
+      <td>静岡</td>
+      <td>群馬</td>
+      <td>栃木</td>
+      <td>山梨</td>
+      <td>新潟</td>
+      <td>長野</td>
+      <td>福島</td>
+      <td>山形</td>
+      <td>秋田</td>
+      <td>岩手</td>
+    </tr>
+    <tr>
+      <th>大阪圏</th>
+      <td>大阪</td>
+      <td>兵庫</td>
+      <td>京都</td>
+      <td>奈良</td>
+      <td>滋賀</td>
+      <td>三重</td>
+      <td>岡山</td>
+      <td>和歌山</td>
+      <td>岐阜</td>
+      <td>福井</td>
+      <td>徳島</td>
+      <td>鳥取</td>
+      <td>長野</td>
+      <td>島根</td>
+      <td>高知</td>
+    </tr>
+    <tr>
+      <th>愛知圏</th>
+      <td>愛知</td>
+      <td>静岡</td>
+      <td>三重</td>
+      <td>和歌山</td>
+      <td>岐阜</td>
+      <td>福井</td>
+      <td>山梨</td>
+      <td>長野</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>福岡圏</th>
+      <td>福岡</td>
+      <td>佐賀</td>
+      <td>長崎</td>
+      <td>熊本</td>
+      <td>山口</td>
+      <td>大分</td>
+      <td>鹿児島</td>
+      <td>宮崎</td>
+      <td>島根</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>沖縄圏</th>
+      <td>沖縄</td>
+      <td>鹿児島</td>
+      <td>宮崎</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>香川圏</th>
+      <td>香川</td>
+      <td>岡山</td>
+      <td>愛媛</td>
+      <td>徳島</td>
+      <td>鳥取</td>
+      <td>島根</td>
+      <td>高知</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>広島圏</th>
+      <td>広島</td>
+      <td>岡山</td>
+      <td>愛媛</td>
+      <td>山口</td>
+      <td>徳島</td>
+      <td>鳥取</td>
+      <td>島根</td>
+      <td>高知</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>宮城圏</th>
+      <td>宮城</td>
+      <td>福島</td>
+      <td>山形</td>
+      <td>秋田</td>
+      <td>岩手</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>石川圏</th>
+      <td>石川</td>
+      <td>富山</td>
+      <td>岐阜</td>
+      <td>福井</td>
+      <td>新潟</td>
+      <td>長野</td>
+      <td>福島</td>
+      <td>山形</td>
+      <td>秋田</td>
+      <td>岩手</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>青森圏</th>
+      <td>青森</td>
+      <td>秋田</td>
+      <td>岩手</td>
+      <td>北海道</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="Hotspot-detection">
+<h2>Hotspot detection<a class="headerlink" href="#Hotspot-detection" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">analyzer</span><span class="o">.</span><span class="n">hotspots</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>spot</th>
+      <th>score</th>
+      <th>c(Z)</th>
+      <th>log_lambda</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>17</th>
+      <td>[愛知, 東京, 神奈川, 埼玉, 千葉, 茨城, 静岡]</td>
+      <td>3.555613</td>
+      <td>15468</td>
+      <td>3.555613</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[東京, 神奈川, 埼玉, 千葉, 茨城]</td>
+      <td>3.548297</td>
+      <td>13545</td>
+      <td>3.548297</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[東京, 神奈川, 埼玉, 千葉]</td>
+      <td>3.543992</td>
+      <td>13067</td>
+      <td>3.543992</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[東京, 神奈川, 埼玉]</td>
+      <td>3.528448</td>
+      <td>11860</td>
+      <td>3.528448</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[東京, 神奈川]</td>
+      <td>3.488595</td>
+      <td>9947</td>
+      <td>3.488595</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>[静岡, 愛知, 東京, 神奈川, 埼玉, 千葉, 茨城, 大阪, 兵庫, 京都, 奈良, ...</td>
+      <td>3.441145</td>
+      <td>22370</td>
+      <td>3.441145</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>[静岡, 愛知, 東京, 神奈川, 埼玉, 千葉, 茨城, 大阪, 兵庫, 京都, 奈良, ...</td>
+      <td>3.429304</td>
+      <td>22680</td>
+      <td>3.429304</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>[静岡, 愛知, 東京, 神奈川, 埼玉, 千葉, 茨城, 大阪, 兵庫, 京都, 奈良, ...</td>
+      <td>3.416726</td>
+      <td>22988</td>
+      <td>3.416726</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>[三重, 群馬, 栃木, 静岡, 愛知, 東京, 神奈川, 埼玉, 千葉, 茨城, 大阪, ...</td>
+      <td>3.362919</td>
+      <td>24113</td>
+      <td>3.362919</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>[大阪, 兵庫, 京都, 奈良, 滋賀]</td>
+      <td>3.357184</td>
+      <td>6587</td>
+      <td>3.357184</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>[三重, 群馬, 栃木, 静岡, 愛知, 東京, 神奈川, 埼玉, 千葉, 茨城, 大阪, ...</td>
+      <td>3.349382</td>
+      <td>24357</td>
+      <td>3.349382</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>[大阪, 兵庫, 京都, 奈良]</td>
+      <td>3.336939</td>
+      <td>6235</td>
+      <td>3.336939</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>[東京]</td>
+      <td>3.332959</td>
+      <td>6169</td>
+      <td>3.332959</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>[大阪, 兵庫, 京都]</td>
+      <td>3.313823</td>
+      <td>5865</td>
+      <td>3.313823</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>[大阪, 兵庫]</td>
+      <td>3.274300</td>
+      <td>5299</td>
+      <td>3.274300</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[大阪]</td>
+      <td>3.220651</td>
+      <td>4640</td>
+      <td>3.220651</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>[愛知]</td>
+      <td>2.695572</td>
+      <td>1447</td>
+      <td>2.695572</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>[福岡, 佐賀]</td>
+      <td>2.667444</td>
+      <td>1364</td>
+      <td>2.667444</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>[福岡]</td>
+      <td>2.529341</td>
+      <td>1023</td>
+      <td>2.529341</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>[石川, 富山]</td>
+      <td>0.000000</td>
+      <td>527</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>[石川]</td>
+      <td>0.000000</td>
+      <td>276</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>[福岡, 佐賀, 長崎, 熊本]</td>
+      <td>0.000000</td>
+      <td>1938</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>[宮城]</td>
+      <td>0.000000</td>
+      <td>321</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>[広島]</td>
+      <td>0.000000</td>
+      <td>335</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>[香川]</td>
+      <td>0.000000</td>
+      <td>520</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>[沖縄]</td>
+      <td>0.000000</td>
+      <td>628</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>[福岡, 佐賀, 長崎]</td>
+      <td>0.000000</td>
+      <td>1697</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>[青森]</td>
+      <td>0.000000</td>
+      <td>136</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Japan-population-example.html" class="btn btn-neutral float-left" title="Japan Population Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="US-unemployment-rates-1997.html" class="btn btn-neutral float-right" title="US Unemployment Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Takeshi Teshima.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
