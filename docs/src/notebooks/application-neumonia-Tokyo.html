@@ -53,7 +53,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#Preparing-Data">Preparing Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Hotspot-Detection-(1)">Hotspot Detection (1)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Plotting-Detected-Hotspots-(1)">Plotting Detected Hotspots (1)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Bonus:-Plotting-Detected-Hotspots-(2)">Bonus: Plotting Detected Hotspots (2)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Summary">Summary</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Bonus:-base-plot">Bonus: base plot</a></li>
@@ -386,15 +385,10 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">echelon</span>
-
 <span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="c1"># For some reason, NetworkX plot functionality (nx.draw()) seems to fail with a newer matplotlib:</span>
-<span class="c1"># https://stackoverflow.com/questions/63198347/attributeerror-module-matplotlib-cbook-has-no-attribute-iterable</span>
-<span class="c1"># assert matplotlib.__version__ ==&#39;2.2.3&#39;</span>
+<span class="kn">import</span> <span class="nn">echelon.contrib.geo</span>
 
-<span class="kn">import</span> <span class="nn">echelon.contrib.geo</span> <span class="k">as</span> <span class="nn">echelon_geo</span>
-
-<span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="p">[</span><span class="n">echelon</span><span class="p">,</span> <span class="n">matplotlib</span><span class="p">]</span> <span class="o">+</span> <span class="n">echelon_geo</span><span class="o">.</span><span class="n">required_modules</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="p">[</span><span class="n">echelon</span><span class="p">,</span> <span class="n">matplotlib</span><span class="p">]</span> <span class="o">+</span> <span class="n">echelon</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">required_modules</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -404,7 +398,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-echelon 1.0.3
+echelon 1.1.0
 matplotlib 3.4.3
 geopandas 0.10.2
 libpysal 4.5.1
@@ -1026,7 +1020,7 @@ E10(江東区): [港区, 江東区]
 <div class="section" id="Hotspot-Detection-(1)">
 <h2>Hotspot Detection (1)<a class="headerlink" href="#Hotspot-Detection-(1)" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1036,7 +1030,7 @@ E10(江東区): [港区, 江東区]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1160,11 +1154,8 @@ E10(江東区): [港区, 江東区]
 </table>
 </div></div>
 </div>
-</div>
-<div class="section" id="Plotting-Detected-Hotspots-(1)">
-<h2>Plotting Detected Hotspots (1)<a class="headerlink" href="#Plotting-Detected-Hotspots-(1)" title="Permalink to this headline"></a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1197,7 +1188,7 @@ E10(江東区): [港区, 江東区]
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_19_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_19_0.png" />
+<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_18_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_18_0.png" />
 </div>
 </div>
 </div>
@@ -1209,68 +1200,109 @@ E10(江東区): [港区, 江東区]
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># hotspots = analyzer.hotspots(result, data=(table43, &#39;Name&#39;, &#39;n&#39;, &#39;o&#39;), score=&#39;binomial&#39;)</span>
-<span class="c1"># hotspots[&#39;score&#39;] = hotspots[&#39;score&#39;] / hotspots[&#39;spot&#39;].map(len)</span>
-<span class="c1"># hotspots = hotspots.sort_values(&#39;score&#39;, ascending=False)</span>
-<span class="c1"># hotspots</span>
+<span></span><span class="n">hotspots</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">hotspots</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">table43</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">),</span> <span class="n">score</span><span class="o">=</span><span class="s1">&#39;binomial&#39;</span><span class="p">)</span>
+<span class="n">hotspots</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hotspots</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">hotspots</span><span class="p">[</span><span class="s1">&#39;spot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+<span class="n">hotspots</span> <span class="o">=</span> <span class="n">hotspots</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-
-<span></span><span class="c1"># from echelon.contrib.geo import GISPlotter</span>
-<span class="c1"># GISPlotter(Tokyo_gdf, &#39;name&#39;).plot_hotspot(hotspots, label_col=&#39;name&#39;, options=dict(nth=1, id_col=&#39;SIKUCHOSON&#39;))</span>
-<span class="c1"># None</span>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">api</span><span class="o">.</span><span class="n">plot_hotspot</span><span class="p">(</span><span class="n">hotspots</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_21_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_21_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="Summary">
 <h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this headline"></a></h2>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># import numpy as np</span>
-<span class="c1"># import pandas as pd</span>
-<span class="c1"># import geopandas as gpd</span>
+<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="c1"># from echelon.api import DataFrameEchelonAnalysis</span>
-<span class="c1"># from echelon.contrib.geo import GISAdjacency</span>
-<span class="c1"># from echelon.contrib.geo import GISPlotter</span>
+<span class="kn">from</span> <span class="nn">echelon.contrib.geo</span> <span class="kn">import</span> <span class="n">GISEchelonAnalysis</span>
 
-<span class="c1"># ## Load data</span>
-<span class="c1"># table42 = pd.read_csv(data_dir / &#39;data/table42.csv&#39;)</span>
-<span class="c1"># table43 = pd.read_csv(data_dir / &#39;data/table43.csv&#39;, encoding=&quot;shift-jis&quot;)</span>
+<span class="c1">## Load data</span>
+<span class="n">table42</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;data/table42.csv&#39;</span><span class="p">)</span>
+<span class="n">table43</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;data/table43.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;shift-jis&quot;</span><span class="p">)</span>
 
-<span class="c1"># ## Compute data</span>
-<span class="c1"># p = table42[&#39;o&#39;] / table42[&#39;n&#39;]</span>
-<span class="c1"># e = table43[&#39;n1&#39;]*p[0] + table43[&#39;n2&#39;]*p[1] + table43[&#39;n3&#39;]*p[2]</span>
-<span class="c1"># SMR = table43[&#39;o&#39;] / e</span>
-<span class="c1"># table43[&#39;SMR&#39;] = SMR</span>
+<span class="c1">## Load Shapefile</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="s1">&#39;shapefile&#39;</span> <span class="o">/</span> <span class="s1">&#39;jpn_adm.shp&#39;</span><span class="p">)</span>
+<span class="n">Tokyo_gdf</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;adm_code&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13101</span><span class="p">,</span> <span class="mi">13123</span><span class="o">+</span><span class="mi">1</span><span class="p">)])]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Tokyo_gdf</span> <span class="o">=</span> <span class="n">Tokyo_gdf</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">table43</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">]],</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;SIKUCHOSON&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span>
 
-<span class="c1"># ## Attach adjacency information based on shape file</span>
-<span class="c1"># gdf = gpd.read_file(data_dir / &#39;shapefile&#39; / &#39;jpn_adm.shp&#39;)</span>
-<span class="c1"># Tokyo_gdf = gdf[gdf[&#39;adm_code&#39;].isin([str(s) for s in range(13101, 13123+1)])].reset_index(drop=True)</span>
-<span class="c1"># table43[&#39;adjacency&#39;] = (GISAdjacency(Tokyo_gdf, id_colname=&#39;SIKUCHOSON&#39;).to_series()[&#39;adjacency&#39;])</span>
+<span class="c1">## Compute data</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">table42</span><span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">table42</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">table43</span><span class="p">[</span><span class="s1">&#39;n1&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">table43</span><span class="p">[</span><span class="s1">&#39;n2&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">table43</span><span class="p">[</span><span class="s1">&#39;n3&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">SMR</span> <span class="o">=</span> <span class="n">table43</span><span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">e</span>
+<span class="n">table43</span><span class="p">[</span><span class="s1">&#39;SMR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SMR</span>
 
-<span class="c1"># ## Construct Echelon</span>
-<span class="c1"># analyzer = DataFrameEchelonAnalysis()</span>
-<span class="c1"># result = analyzer(table43, &#39;SMR&#39;, &#39;Name&#39;, &#39;adjacency&#39;)</span>
+<span class="c1">## Find echelons</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">GISEchelonAnalysis</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">api</span><span class="p">(</span><span class="n">table43</span><span class="p">,</span> <span class="n">Tokyo_gdf</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;SMR&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">dendrogram</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 
-<span class="c1"># ## Scan hot spots</span>
-<span class="c1"># hotspots = analyzer.hotspots(result, data=(table43, &#39;Name&#39;, &#39;n&#39;, &#39;o&#39;), score=&#39;binomial&#39;)</span>
+<span class="c1">## Scan hot spots</span>
+<span class="n">hotspots</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">hotspots</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">table43</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">),</span> <span class="n">score</span><span class="o">=</span><span class="s1">&#39;binomial&#39;</span><span class="p">)</span>
 
-<span class="c1"># ## Plot hot spots</span>
-<span class="c1"># Tokyo_gdf[&#39;name&#39;] = Tokyo_gdf[&#39;SIKUCHOSON&#39;].map(lambda s: AlphabetNames[s])</span>
-<span class="c1"># GISPlotter(Tokyo_gdf, &#39;name&#39;).plot_hotspot(hotspots, label_col=&#39;name&#39;, options=dict(nth=1, id_col=&#39;SIKUCHOSON&#39;))</span>
-<span class="c1"># None</span>
+<span class="c1">## Plot hot spots</span>
+<span class="n">Tokyo_gdf</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tokyo_gdf</span><span class="p">[</span><span class="s1">&#39;SIKUCHOSON&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">AlphabetNames</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+<span class="n">api</span><span class="o">.</span><span class="n">plot_hotspot</span><span class="p">(</span><span class="n">hotspots</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+E10(江東区): [港区, 江東区]
+ (max: 0.8097101496026745)
+├── E9(荒川区): [文京区, 千代田区, 新宿区, 墨田区, 中央区, 目黒区, 杉並区, 世田谷区, 荒川区]
+│    (max: 0.9542372963272185)
+│   ├── E8(中野区): [中野区]
+│   │    (max: 0.9922921961759763)
+│   │   ├── E7(北区): [北区]
+│   │   │    (max: 1.0375137862297261)
+│   │   │   ├── E2(練馬区): [豊島区, 板橋区, 練馬区]
+│   │   │   │    (max: 1.1694088184210711)
+│   │   │   └── E1(葛飾区): [足立区, 葛飾区]
+│   │   │        (max: 1.2984145393208892)
+│   │   └── E4(渋谷区): [渋谷区]
+│   │        (max: 0.9988848483530447)
+│   └── E3(台東区): [台東区]
+│        (max: 1.0677968541200462)
+├── E6(品川区): [大田区, 品川区]
+│    (max: 0.9442411594508717)
+└── E5(江戸川区): [江戸川区]
+     (max: 0.9797238558394804)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_23_1.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_23_1.png" />
 </div>
 </div>
 <div class="section" id="Bonus:-base-plot">
@@ -1291,7 +1323,7 @@ E10(江東区): [港区, 江東区]
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_26_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_26_0.png" />
+<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_25_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_25_0.png" />
 </div>
 </div>
 </div>
@@ -1313,16 +1345,7 @@ E10(江東区): [港区, 江東区]
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_28_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_28_0.png" />
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
-</pre></div>
+<img alt="../../_images/src_notebooks_application-neumonia-Tokyo_27_0.png" src="../../_images/src_notebooks_application-neumonia-Tokyo_27_0.png" />
 </div>
 </div>
 </div>
